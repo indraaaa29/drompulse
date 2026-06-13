@@ -1,0 +1,61 @@
+name: CI — Build Verification
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build & Verify
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run site build
+        run: npm run site-build
+
+      - name: Verify output HTML files exist
+        run: |
+          echo "Checking generated HTML output files..."
+          for file in index.html hostel_map.html sustainability_impact.html ai_advisor.html savings_timeline.html; do
+            if [ -f "$file" ]; then
+              echo "✅ $file exists ($(wc -c < $file) bytes)"
+            else
+              echo "❌ $file is MISSING"
+              exit 1
+            fi
+          done
+          echo "All output files verified successfully."
+
+      - name: Check for legacy brand references in output
+        run: |
+          echo "Checking for legacy brand references..."
+          if grep -ril "DORMPULSE\|drompulse\|DormPulse" index.html hostel_map.html sustainability_impact.html ai_advisor.html savings_timeline.html; then
+            echo "❌ Legacy brand references found in output files!"
+            exit 1
+          else
+            echo "✅ No legacy brand references found."
+          fi
+
+      - name: Check for console.log in source
+        run: |
+          echo "Checking for debug console.log statements..."
+          if grep -r "console\.log" temp_stitch/ --include="*.html"; then
+            echo "⚠️  console.log found in source templates"
+            exit 1
+          else
+            echo "✅ No console.log in source templates."
+          fi

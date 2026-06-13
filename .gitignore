@@ -1,3 +1,31 @@
+# Dependencies
 node_modules/
+
+# Build output
 dist/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS artifacts
 .DS_Store
+Thumbs.db
+thumbs.db
+desktop.ini
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Internal tooling (not needed by public contributors)
+download.js
+download.ps1

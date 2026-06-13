@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-
-<html  lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Energy Overview - Enervia</title>
+<meta name="description" content="Enervia Energy Overview — Real-time energy consumption monitoring and optimization dashboard for smart hostel management."/>
+<meta name="theme-color" content="#006e2f"/>
+<title>Energy Overview — Enervia</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
 <script id="tailwind-config">
@@ -60,48 +62,57 @@
   }
 </script>
 
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <style>
-        body { font-family: 'Outfit', sans-serif; background-color: #f8faf4; color: #191c19; }
-        .material-symbols-outlined { font-family: 'Material Symbols Outlined'; }
-        
-        /* Ambient shadows for clusters */
-        .ecosystem-cluster {
-            background-color: #ffffff;
-            box-shadow: 0px 10px 40px rgba(31, 41, 55, 0.04);
-            border-radius: 2rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .ecosystem-cluster:hover {
-            transform: translateY(-2px);
-            box-shadow: 0px 15px 50px rgba(31, 41, 55, 0.06);
-        }
+  body { font-family: 'Outfit', sans-serif; background-color: #f8faf4; color: #191c19; }
+  .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1; }
 
-        /* Subtle Energy Streams */
-        .energy-stream {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, rgba(64, 194, 253, 0.2), transparent);
-            height: 2px;
-            width: 100%;
-            animation: flow 3s infinite linear;
-        }
-        @keyframes flow {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
+  .ecosystem-cluster {
+    background: #ffffff;
+    box-shadow: 0 4px 24px rgba(0, 110, 47, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+    border-radius: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .ecosystem-cluster:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 110, 47, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
 
-        /* Smooth Tendril animations */
-        .tendril-path {
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: growTendril 2s ease-out forwards;
-        }
-        @keyframes growTendril {
-            to { stroke-dashoffset: 0; }
-        }
-    </style>
+  .tendril-path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: growTendril 2.5s ease-out forwards;
+  }
+  @keyframes growTendril { to { stroke-dashoffset: 0; } }
+
+  .energy-stream {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.25), transparent);
+    height: 2px;
+    width: 100%;
+    animation: flowStream 4s infinite linear;
+  }
+  @keyframes flowStream {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .stat-counter {
+    animation: countUp 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.6s ease-out forwards; }
+  .fade-up-1 { animation-delay: 0.1s; opacity: 0; }
+  .fade-up-2 { animation-delay: 0.2s; opacity: 0; }
+  .fade-up-3 { animation-delay: 0.3s; opacity: 0; }
+  .fade-up-4 { animation-delay: 0.4s; opacity: 0; }
+</style>
 </head>
 <body class="bg-background text-on-background font-sans min-h-screen flex flex-col pt-24 selection:bg-primary-container selection:text-on-primary-container">
 
@@ -195,116 +206,237 @@
   });
 </script>
 
-<main class="flex-grow flex flex-col items-center w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop pb-zone-padding gap-zone-padding">
-<!-- Header Zone -->
-<header class="w-full max-w-4xl text-center flex flex-col gap-4 mt-8">
-<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary tracking-tighter">Enervia Ecosystem</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Powering sustainable hostels through intelligent energy management.</p>
-</header>
-<!-- Bento Grid Layout for Ecosystem Data -->
-<div class="w-full grid grid-cols-1 md:grid-cols-12 gap-cluster-gap auto-rows-min">
-<!-- Core Pulse (Current Usage) -->
+<main class="flex-grow flex flex-col items-center w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop pb-zone-padding gap-cluster-gap pt-8">
+
+  <!-- Page Header -->
+  <header class="w-full max-w-3xl text-center flex flex-col gap-3 mt-4 fade-up fade-up-1">
+    <div class="flex items-center justify-center gap-2 text-primary/70">
+      <span class="material-symbols-outlined text-sm filled">bolt</span>
+      <span class="text-xs font-semibold tracking-widest uppercase">Live Energy Dashboard</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold text-on-surface tracking-tight leading-tight">
+      Enervia <span class="text-primary">Ecosystem</span>
+    </h1>
+    <p class="text-on-surface-variant text-base md:text-lg leading-relaxed">
+      Powering sustainable hostels through intelligent, occupancy-aware energy management.
+    </p>
+  </header>
+
+  <!-- Bento Grid -->
+  <div class="w-full grid grid-cols-1 md:grid-cols-12 gap-cluster-gap auto-rows-min fade-up fade-up-2">
+
+    <!-- Core Pulse (Current Usage) — Shader canvas injected here by build.js -->
+    <!-- Core Pulse (Current Usage) -->
 
       <canvas id="shader-canvas-ANIMATION_3" style="display:block;width:100%;height:100%;position:absolute;inset:0;opacity:0.12;pointer-events:none;z-index:0;"></canvas>
     
-<div class="ecosystem-cluster col-span-1 md:col-span-8 p-8 flex flex-col relative overflow-hidden min-h-[400px]">
-<div class="relative z-10 flex flex-col justify-between h-full">
-<div>
-<h2 class="font-headline-md text-headline-md text-on-surface">Current Usage</h2>
-<p class="font-body-md text-body-md text-on-surface-variant">Real-time energy draw across all active nodes.</p>
-</div>
-<div class="flex items-end gap-4 mt-auto">
-<span class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary tracking-tighter">42.5</span>
-<span class="font-body-lg text-body-lg text-on-surface-variant pb-2">kW/h</span>
-<!-- Status Chip -->
-<div class="ml-auto flex items-center gap-2 bg-tertiary-container/20 text-on-tertiary-container px-4 py-1.5 rounded-full border border-tertiary-container/30">
-<span class="material-symbols-outlined text-sm" data-icon="eco" style="font-variation-settings: 'FILL' 1;">eco</span>
-<span class="font-label-caps text-label-caps">Optimized Flow</span>
-</div>
-</div>
-</div>
-<!-- Vibrant Tendrils Visualization (Mocked with SVG) -->
-<div class="absolute bottom-0 left-0 w-full h-2/3 pointer-events-none opacity-50">
-<svg class="w-full h-full preserve-aspect-ratio-none" viewbox="0 0 800 300">
-<path class="tendril-path" d="M0,300 C100,200 200,280 300,150 C400,20 500,250 600,100 C700,-50 800,200 800,200" fill="none" stroke="#22c55e" stroke-linecap="round" stroke-width="4"></path>
-<path class="tendril-path" d="M0,300 C150,250 250,150 400,200 C550,250 650,50 800,150" fill="none" stroke="#4ae176" stroke-linecap="round" stroke-width="2" style="animation-delay: 0.5s;"></path>
-</svg>
-</div>
-<div class="energy-stream top-1/2"></div>
-</div>
-<!-- Carbon Reduction (Growing Tree concept) -->
-<div class="ecosystem-cluster col-span-1 md:col-span-4 p-8 flex flex-col justify-between items-center text-center">
-<div class="w-full">
-<h2 class="font-headline-md text-headline-md text-on-surface">Carbon Offset</h2>
-</div>
-<!-- Organic Tree Placeholder -->
-<div class="relative w-48 h-48 my-6 flex items-center justify-center rounded-full bg-surface-container-low/50">
-<div class="w-full h-full bg-cover bg-center rounded-full" data-alt="A macro, beautifully lit top-down view of a small, vibrant green bonsai tree or a cluster of fresh organic leaves resting on a clean, light beige, minimalist studio background. The lighting is soft and airy, highlighting the delicate textures of the leaves. The mood is calm, modern, and deeply connected to nature, reflecting a pristine eco-friendly aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAcbfHJ2zpzwhnujRtAHKfPX7AdBkaVa2YTYiR4REdqw-HcN6hmgAZ8r1Ndc3tBe9pgwmrn-6mx6egVuBkpzskuvKd2HE6tHt8DDAiQqidtjLXSdgodXYr5y6GDQ2joEHHzcYcdmpFZ5fHvU_6UL3Rc7lHbYu0gFadewUwlHE9aZuiT9O_WSBC1vM1iMJrhM--S6pdEes2XMWK3aGmYLV4nws-SR-M4b8ZB6rPCrbSecAcLtoMjnTaQPQ');">
-</div>
-<!-- Energy pulse ring -->
-<div class="absolute inset-0 rounded-full border-2 border-primary-container opacity-30 animate-ping"></div>
-</div>
-<div>
-<span class="font-display-lg text-display-lg text-tertiary">-12%</span>
-<p class="font-body-md text-body-md text-on-surface-variant mt-2">Reduction this month.</p>
-</div>
-</div>
-<!-- Active Rooms (Leaf Clusters) -->
-<div class="ecosystem-cluster col-span-1 md:col-span-6 p-8 flex flex-col gap-6">
-<h2 class="font-headline-md text-headline-md text-on-surface">Active Zones</h2>
-<div class="flex flex-wrap gap-4">
-<!-- Zone Node -->
-<div class="flex items-center gap-3 bg-surface-container p-3 rounded-2xl border border-transparent hover:border-primary-container transition-colors">
-<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
-<span class="material-symbols-outlined" data-icon="bed">bed</span>
-</div>
-<div>
-<p class="font-label-caps text-label-caps text-on-surface">North Wing</p>
-<p class="font-body-md text-sm text-primary">Normal Load</p>
-</div>
-</div>
-<!-- Zone Node -->
-<div class="flex items-center gap-3 bg-surface-container p-3 rounded-2xl border border-transparent hover:border-primary-container transition-colors">
-<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
-<span class="material-symbols-outlined" data-icon="coffee">coffee</span>
-</div>
-<div>
-<p class="font-label-caps text-label-caps text-on-surface">Lounge Area</p>
-<p class="font-body-md text-sm text-secondary">Low Draw</p>
-</div>
-</div>
-<!-- Zone Node -->
-<div class="flex items-center gap-3 bg-surface-container p-3 rounded-2xl border border-transparent hover:border-primary-container transition-colors">
-<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
-<span class="material-symbols-outlined" data-icon="local_laundry_service">local_laundry_service</span>
-</div>
-<div>
-<p class="font-label-caps text-label-caps text-on-surface">Laundry</p>
-<p class="font-body-md text-sm text-error">High Usage</p>
-</div>
-</div>
-</div>
-</div>
-<!-- Efficiency Score -->
-<div class="ecosystem-cluster col-span-1 md:col-span-6 p-8 flex flex-col justify-center items-center">
-<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Efficiency Rating</h2>
-<div class="relative w-32 h-32 flex items-center justify-center">
-<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
-<!-- Background Circle -->
-<circle cx="50" cy="50" fill="none" r="45" stroke="#e1e3dd" stroke-width="8"></circle>
-<!-- Progress Circle -->
-<circle class="transition-all duration-1000 ease-out" cx="50" cy="50" fill="none" r="45" stroke="#22c55e" stroke-dasharray="283" stroke-dashoffset="42" stroke-width="8"></circle>
-</svg>
-<div class="absolute flex flex-col items-center">
-<span class="font-display-lg text-display-lg text-primary tracking-tighter">85</span>
-<span class="font-label-caps text-label-caps text-on-surface-variant">SCORE</span>
-</div>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant mt-6 text-center max-w-xs">Ecosystem is functioning efficiently. Optimal balance achieved in 80% of zones.</p>
-</div>
-</div>
+    <div class="ecosystem-cluster col-span-1 md:col-span-8 p-7 flex flex-col relative overflow-hidden min-h-[380px]">
+      <div class="relative z-10 flex flex-col justify-between h-full gap-6">
+        <div class="flex items-start justify-between">
+          <div>
+            <p class="text-xs font-semibold tracking-widest uppercase text-on-surface-variant mb-1">Current Usage</p>
+            <h2 class="text-xl font-semibold text-on-surface">Real-time Energy Draw</h2>
+            <p class="text-sm text-on-surface-variant mt-1">Across all active zones — updated every 30s</p>
+          </div>
+          <div class="flex items-center gap-1.5 bg-green-50 text-green-700 px-3 py-1.5 rounded-full border border-green-200 text-xs font-semibold">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            Live
+          </div>
+        </div>
+
+        <div class="flex items-end gap-3 mt-auto">
+          <span class="text-6xl md:text-7xl font-bold text-primary tracking-tighter leading-none">42.5</span>
+          <div class="pb-2 flex flex-col">
+            <span class="text-lg text-on-surface-variant font-medium">kW/h</span>
+            <span class="text-xs text-green-600 font-semibold flex items-center gap-1 mt-1">
+              <span class="material-symbols-outlined text-sm">trending_down</span>
+              8.2% vs yesterday
+            </span>
+          </div>
+        </div>
+
+        <!-- Mini spark bars -->
+        <div class="flex items-end gap-1 h-12 mt-2">
+          <div class="flex-1 bg-primary/10 rounded-sm" style="height: 40%"></div>
+          <div class="flex-1 bg-primary/20 rounded-sm" style="height: 65%"></div>
+          <div class="flex-1 bg-primary/15 rounded-sm" style="height: 50%"></div>
+          <div class="flex-1 bg-primary/25 rounded-sm" style="height: 80%"></div>
+          <div class="flex-1 bg-primary/20 rounded-sm" style="height: 55%"></div>
+          <div class="flex-1 bg-primary/30 rounded-sm" style="height: 70%"></div>
+          <div class="flex-1 bg-primary/35 rounded-sm" style="height: 85%"></div>
+          <div class="flex-1 bg-primary/20 rounded-sm" style="height: 60%"></div>
+          <div class="flex-1 bg-primary/40 rounded-sm" style="height: 90%"></div>
+          <div class="flex-1 bg-primary rounded-sm animate-pulse" style="height: 72%"></div>
+        </div>
+      </div>
+
+      <!-- Animated SVG Tendrils -->
+      <div class="absolute bottom-0 left-0 w-full h-2/3 pointer-events-none opacity-40">
+        <svg class="w-full h-full" viewBox="0 0 800 300" preserveAspectRatio="none">
+          <path class="tendril-path" d="M0,300 C100,200 200,280 300,150 C400,20 500,250 600,100 C700,-50 800,200 800,200" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"/>
+          <path class="tendril-path" d="M0,300 C150,250 250,150 400,200 C550,250 650,50 800,150" fill="none" stroke="#4ae176" stroke-width="2" stroke-linecap="round" style="animation-delay: 0.5s;"/>
+        </svg>
+      </div>
+      <div class="energy-stream top-1/2"></div>
+    </div>
+
+    <!-- Carbon Offset -->
+    <div class="ecosystem-cluster col-span-1 md:col-span-4 p-7 flex flex-col justify-between items-center text-center gap-4">
+      <div class="w-full">
+        <p class="text-xs font-semibold tracking-widest uppercase text-on-surface-variant mb-1">Carbon Offset</p>
+        <h2 class="text-xl font-semibold text-on-surface">Monthly Reduction</h2>
+      </div>
+
+      <!-- Radial progress -->
+      <div class="relative w-36 h-36 flex items-center justify-center">
+        <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#e1e3dd" stroke-width="8"/>
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#22c55e" stroke-width="8"
+            stroke-dasharray="276" stroke-dashoffset="55" stroke-linecap="round"
+            class="transition-all duration-1000"/>
+        </svg>
+        <div class="absolute flex flex-col items-center">
+          <span class="text-2xl font-bold text-primary leading-none">-12%</span>
+          <span class="text-xs text-on-surface-variant mt-0.5">CO₂</span>
+        </div>
+        <div class="absolute inset-0 rounded-full border-2 border-primary/20 animate-ping opacity-30"></div>
+      </div>
+
+      <div>
+        <span class="text-3xl font-bold text-tertiary">1,240</span>
+        <span class="text-sm text-on-surface-variant ml-1">kg saved</span>
+        <p class="text-xs text-on-surface-variant mt-1">Prevented from atmosphere this month</p>
+      </div>
+    </div>
+
+    <!-- Active Zones -->
+    <div class="ecosystem-cluster col-span-1 md:col-span-7 p-7 flex flex-col gap-5">
+      <div>
+        <p class="text-xs font-semibold tracking-widest uppercase text-on-surface-variant mb-1">Active Zones</p>
+        <h2 class="text-xl font-semibold text-on-surface">Live Zone Status</h2>
+      </div>
+      <div class="flex flex-col gap-3">
+        <!-- Zone row -->
+        <div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl border border-transparent hover:border-primary/20 transition-colors group cursor-pointer">
+          <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-primary text-[18px]">bed</span>
+          </div>
+          <div class="flex-grow min-w-0">
+            <p class="text-sm font-semibold text-on-surface truncate">North Wing — Rooms</p>
+            <p class="text-xs text-on-surface-variant">18 active · 6 vacant</p>
+          </div>
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <div class="w-16 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+              <div class="h-full bg-green-400 rounded-full" style="width: 75%"></div>
+            </div>
+            <span class="text-xs font-semibold text-green-600">Normal</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl border border-transparent hover:border-amber-200 transition-colors group cursor-pointer">
+          <div class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-amber-600 text-[18px]">weekend</span>
+          </div>
+          <div class="flex-grow min-w-0">
+            <p class="text-sm font-semibold text-on-surface truncate">Common Lounges</p>
+            <p class="text-xs text-on-surface-variant">2 active · peak usage</p>
+          </div>
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <div class="w-16 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+              <div class="h-full bg-amber-400 rounded-full" style="width: 90%"></div>
+            </div>
+            <span class="text-xs font-semibold text-amber-600">High</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl border border-transparent hover:border-red-200 transition-colors group cursor-pointer">
+          <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-red-500 text-[18px]">local_laundry_service</span>
+          </div>
+          <div class="flex-grow min-w-0">
+            <p class="text-sm font-semibold text-on-surface truncate">Laundry Block</p>
+            <p class="text-xs text-on-surface-variant">3 machines active</p>
+          </div>
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <div class="w-16 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+              <div class="h-full bg-red-400 rounded-full" style="width: 95%"></div>
+            </div>
+            <span class="text-xs font-semibold text-red-600">Critical</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl border border-transparent hover:border-blue-200 transition-colors group cursor-pointer">
+          <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-blue-500 text-[18px]">sensors</span>
+          </div>
+          <div class="flex-grow min-w-0">
+            <p class="text-sm font-semibold text-on-surface truncate">Smart Automation</p>
+            <p class="text-xs text-on-surface-variant">12 auto-shutoffs triggered today</p>
+          </div>
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">AI Active</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Efficiency Rating -->
+    <div class="ecosystem-cluster col-span-1 md:col-span-5 p-7 flex flex-col justify-center items-center gap-5">
+      <div class="text-center">
+        <p class="text-xs font-semibold tracking-widest uppercase text-on-surface-variant mb-1">Efficiency Rating</p>
+        <h2 class="text-xl font-semibold text-on-surface">Ecosystem Score</h2>
+      </div>
+
+      <div class="relative w-36 h-36 flex items-center justify-center">
+        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" fill="none" r="45" stroke="#e1e3dd" stroke-width="8"/>
+          <circle class="transition-all duration-1000 ease-out" cx="50" cy="50" fill="none" r="45"
+            stroke="#22c55e" stroke-dasharray="283" stroke-dashoffset="42" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <div class="absolute flex flex-col items-center">
+          <span class="text-4xl font-bold text-primary tracking-tighter">85</span>
+          <span class="text-xs text-on-surface-variant font-semibold">/ 100</span>
+        </div>
+      </div>
+
+      <div class="w-full space-y-2">
+        <div class="flex items-center justify-between text-xs">
+          <span class="text-on-surface-variant">Lighting Efficiency</span>
+          <span class="font-semibold text-green-600">92%</span>
+        </div>
+        <div class="w-full h-1.5 bg-surface-container-high rounded-full">
+          <div class="h-full bg-green-400 rounded-full" style="width: 92%"></div>
+        </div>
+
+        <div class="flex items-center justify-between text-xs mt-2">
+          <span class="text-on-surface-variant">HVAC Optimization</span>
+          <span class="font-semibold text-amber-600">74%</span>
+        </div>
+        <div class="w-full h-1.5 bg-surface-container-high rounded-full">
+          <div class="h-full bg-amber-400 rounded-full" style="width: 74%"></div>
+        </div>
+
+        <div class="flex items-center justify-between text-xs mt-2">
+          <span class="text-on-surface-variant">Appliance Control</span>
+          <span class="font-semibold text-green-600">88%</span>
+        </div>
+        <div class="w-full h-1.5 bg-surface-container-high rounded-full">
+          <div class="h-full bg-green-400 rounded-full" style="width: 88%"></div>
+        </div>
+      </div>
+
+      <p class="text-xs text-on-surface-variant text-center">
+        Optimal balance achieved in <strong class="text-primary">80%</strong> of zones.
+      </p>
+    </div>
+
+  </div>
 </main>
-<!-- Footer Shared Component -->
+
+<!-- Footer placeholder — replaced by build.js -->
 
 <footer class="w-full py-zone-padding mt-zone-padding bg-surface-container-low/50 border-t border-surface-variant/20">
   <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop gap-cluster-gap max-w-max-width mx-auto">
@@ -500,4 +632,5 @@
       })();
       </script>
     
-</body></html>
+</body>
+</html>

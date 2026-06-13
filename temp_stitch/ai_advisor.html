@@ -1,366 +1,293 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Enervia - AI Energy Advisor</title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind CSS -->
+<meta name="description" content="Enervia AI Advisor — Real-time AI-powered energy optimization recommendations and automated intervention reports."/>
+<meta name="theme-color" content="#006e2f"/>
+<title>AI Advisor — Enervia</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Tailwind Configuration -->
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "surface-container-low": "#f2f4ee",
-                    "surface-variant": "#e1e3dd",
-                    "on-tertiary": "#ffffff",
-                    "on-tertiary-fixed": "#00210a",
-                    "on-surface": "#191c19",
-                    "surface-dim": "#d8dbd5",
-                    "surface-bright": "#f8faf4",
-                    "primary-fixed": "#6bff8f",
-                    "tertiary-fixed-dim": "#79db8d",
-                    "surface-container-highest": "#e1e3dd",
-                    "on-primary": "#ffffff",
-                    "tertiary": "#006d30",
-                    "on-error": "#ffffff",
-                    "outline-variant": "#bccbb9",
-                    "tertiary-fixed": "#95f8a7",
-                    "on-primary-fixed-variant": "#005321",
-                    "on-primary-fixed": "#002109",
-                    "primary": "#006e2f",
-                    "primary-container": "#22c55e",
-                    "on-background": "#191c19",
-                    "background": "#f8faf4",
-                    "on-secondary-fixed": "#001e2c",
-                    "error": "#ba1a1a",
-                    "secondary": "#00668a",
-                    "secondary-container": "#40c2fd",
-                    "secondary-fixed-dim": "#7bd0ff",
-                    "on-tertiary-container": "#004a1f",
-                    "outline": "#6d7b6c",
-                    "surface-container": "#ecefe9",
-                    "on-secondary-fixed-variant": "#004c69",
-                    "on-secondary-container": "#004d6a",
-                    "on-secondary": "#ffffff",
-                    "tertiary-container": "#5ebf74",
-                    "inverse-on-surface": "#eff1ec",
-                    "secondary-fixed": "#c4e7ff",
-                    "inverse-primary": "#4ae176",
-                    "on-surface-variant": "#3d4a3d",
-                    "on-primary-container": "#004b1e",
-                    "surface-container-high": "#e7e9e3",
-                    "error-container": "#ffdad6",
-                    "primary-fixed-dim": "#4ae176",
-                    "surface-tint": "#006e2f",
-                    "on-tertiary-fixed-variant": "#005323",
-                    "surface-container-lowest": "#ffffff",
-                    "inverse-surface": "#2e312e",
-                    "surface": "#f8faf4",
-                    "on-error-container": "#93000a"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "max-width": "1440px",
-                    "margin-desktop": "5rem",
-                    "cluster-gap": "2rem",
-                    "zone-padding": "3rem",
-                    "margin-mobile": "1.5rem",
-                    "unit": "8px"
-            },
-            "fontFamily": {
-                    "body-md": [
-                            "Outfit"
-                    ],
-                    "body-lg": [
-                            "Outfit"
-                    ],
-                    "display-lg": [
-                            "Outfit"
-                    ],
-                    "label-caps": [
-                            "Outfit"
-                    ],
-                    "headline-md": [
-                            "Outfit"
-                    ],
-                    "display-lg-mobile": [
-                            "Outfit"
-                    ]
-            },
-            "fontSize": {
-                    "body-md": [
-                            "16px",
-                            {
-                                    "lineHeight": "1.6",
-                                    "fontWeight": "400"
-                            }
-                    ],
-                    "body-lg": [
-                            "18px",
-                            {
-                                    "lineHeight": "1.7",
-                                    "letterSpacing": "0.01em",
-                                    "fontWeight": "400"
-                            }
-                    ],
-                    "display-lg": [
-                            "48px",
-                            {
-                                    "lineHeight": "1.1",
-                                    "letterSpacing": "-0.02em",
-                                    "fontWeight": "600"
-                            }
-                    ],
-                    "label-caps": [
-                            "12px",
-                            {
-                                    "lineHeight": "1.0",
-                                    "letterSpacing": "0.1em",
-                                    "fontWeight": "600"
-                            }
-                    ],
-                    "headline-md": [
-                            "24px",
-                            {
-                                    "lineHeight": "1.3",
-                                    "letterSpacing": "-0.01em",
-                                    "fontWeight": "500"
-                            }
-                    ],
-                    "display-lg-mobile": [
-                            "36px",
-                            {
-                                    "lineHeight": "1.2",
-                                    "fontWeight": "600"
-                            }
-                    ]
-            }
-    },
+  tailwind.config = {
+    theme: {
+      extend: {
+        "colors": {
+          "primary": "#006e2f",
+          "primary-container": "#22c55e",
+          "on-primary": "#ffffff",
+          "secondary": "#00668a",
+          "secondary-container": "#40c2fd",
+          "on-secondary": "#ffffff",
+          "tertiary": "#006d30",
+          "tertiary-container": "#5ebf74",
+          "on-tertiary": "#ffffff",
+          "background": "#f8faf4",
+          "on-background": "#00210a",
+          "surface": "#f8faf4",
+          "on-surface": "#191c19",
+          "surface-container": "#ecefe9",
+          "surface-container-low": "#f2f4ee",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-high": "#e7e9e3",
+          "surface-container-highest": "#e1e3dd",
+          "on-surface-variant": "#3d4a3d",
+          "outline": "#6d7b6c",
+          "outline-variant": "#bccbb9",
+          "error": "#ba1a1a",
+          "error-container": "#ffdad6",
+          "on-error": "#ffffff",
+          "on-error-container": "#93000a",
+          "surface-variant": "#e1e3dd",
+          "secondary-fixed": "#c4e7ff",
+          "on-secondary-fixed": "#001e2c",
+          "tertiary-fixed": "#95f8a7",
+          "on-tertiary-fixed-variant": "#005323"
         },
+        "borderRadius": {
+          "DEFAULT": "0.5rem",
+          "lg": "0.75rem",
+          "xl": "1rem",
+          "2xl": "1.5rem",
+          "3xl": "2rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "max-width": "1280px",
+          "margin-desktop": "4rem",
+          "cluster-gap": "1.75rem",
+          "zone-padding": "2.5rem",
+          "margin-mobile": "1.25rem"
+        },
+        "fontFamily": {
+          "sans": ["Outfit", "sans-serif"]
+        }
       }
-    </script>
+    }
+  }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .material-symbols-outlined.filled {
-            font-variation-settings: 'FILL' 1;
-        }
-        
-        /* Ambient animations */
-        @keyframes subtle-pulse {
-            0%, 100% { opacity: 0.8; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.02); }
-        }
-        .pulse-ambient {
-            animation: subtle-pulse 4s ease-in-out infinite;
-        }
-        
-        /* Smooth scrolling */
-        html { scroll-behavior: smooth; }
-        
-        /* Energy stream gradient */
-        .bg-energy-stream {
-            background: linear-gradient(135deg, rgba(0,110,47,0.1) 0%, rgba(34,197,94,0.1) 100%);
-        }
-    </style>
+  body { font-family: 'Outfit', sans-serif; background-color: #f8faf4; color: #191c19; }
+  .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1; }
+
+  html { scroll-behavior: smooth; }
+
+  .card-shadow { box-shadow: 0 4px 24px rgba(0,110,47,0.06), 0 1px 4px rgba(0,0,0,0.04); }
+  .card-shadow:hover { box-shadow: 0 12px 40px rgba(0,110,47,0.1), 0 2px 8px rgba(0,0,0,0.06); }
+
+  .bg-energy-gradient {
+    background: linear-gradient(135deg, rgba(0,110,47,0.04) 0%, rgba(34,197,94,0.06) 100%);
+  }
+
+  @keyframes subtlePulse {
+    0%, 100% { opacity: 0.85; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.015); }
+  }
+  .pulse-ambient { animation: subtlePulse 4s ease-in-out infinite; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.5s ease-out forwards; }
+  .fade-up-1 { animation-delay: 0.05s; opacity: 0; }
+  .fade-up-2 { animation-delay: 0.15s; opacity: 0; }
+  .fade-up-3 { animation-delay: 0.25s; opacity: 0; }
+  .fade-up-4 { animation-delay: 0.35s; opacity: 0; }
+
+  .authorize-btn { transition: all 0.3s ease; }
+  .authorize-btn.loading { opacity: 0.7; pointer-events: none; }
+  .authorize-btn.done { background: #006e2f; color: #fff; border-color: #006e2f; }
+</style>
 </head>
-<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col pt-[88px] selection:bg-primary-container selection:text-on-primary-container">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/80 dark:bg-surface-dim/80 shadow-[0px_10px_40px_rgba(31,41,55,0.04)]">
-<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-max-width mx-auto">
-<!-- Brand -->
-<div class="flex items-center gap-2 cursor-pointer group">
-<span class="material-symbols-outlined text-primary text-[32px] filled group-hover:rotate-12 transition-transform duration-300">energy_savings_leaf</span>
-<span class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary tracking-tighter">DORMPULSE</span>
-</div>
-<!-- Navigation Links (Hidden on Mobile) -->
-<div class="hidden md:flex items-center gap-8">
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Overview</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Hostel Map</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Flow</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Impact</a>
-<!-- Active Item -->
-<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">AI Advisor</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Heatmap</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Savings</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Automation</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">SDG 7</a>
-</div>
-<!-- Trailing Actions -->
-<div class="flex items-center gap-4">
-<div class="hidden md:flex gap-4">
-<button class="text-on-surface-variant hover:text-primary transition-colors duration-300">
-<span class="material-symbols-outlined">notifications_active</span>
-</button>
-<button class="text-on-surface-variant hover:text-primary transition-colors duration-300">
-<span class="material-symbols-outlined">account_circle</span>
-</button>
-</div>
-<button class="bg-primary hover:bg-tertiary text-on-primary px-6 py-2 rounded-full font-medium transition-all duration-300 shadow-[0px_4px_14px_rgba(0,110,47,0.2)] hover:shadow-[0px_6px_20px_rgba(0,110,47,0.3)] active:scale-95 whitespace-nowrap">
-                    Optimize Now
-                </button>
-<!-- Mobile Menu Toggle -->
-<button class="md:hidden text-on-surface-variant">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</div>
-</div>
-</nav>
-<!-- Main Canvas -->
-<main class="flex-grow flex flex-col w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-zone-padding gap-zone-padding">
-<!-- Header Section -->
-<header class="flex flex-col gap-4 max-w-3xl">
-<div class="flex items-center gap-3 text-primary">
-<span class="material-symbols-outlined filled text-[28px]">robot_2</span>
-<span class="font-label-caps text-label-caps uppercase tracking-widest">Sustainability Intelligence Unit</span>
-</div>
-<h1 class="font-display-lg text-[40px] md:text-display-lg text-on-surface leading-tight tracking-tight">
-                Architectural Efficiency Reports
-            </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-                Real-time analysis of spatial energy flow. The AI constantly monitors zones, identifying anomalies and recommending structural optimizations to align with ecosystem protocols.
-            </p>
-</header>
-<!-- Bento Grid Layout -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-cluster-gap auto-rows-[minmax(180px,_auto)]">
-<!-- High Priority Report (Spans 8 columns) -->
-<article class="col-span-1 md:col-span-8 bg-surface-container-lowest rounded-2xl p-8 shadow-[0px_10px_40px_rgba(31,41,55,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300 flex flex-col justify-between">
-<!-- Ambient Accent -->
-<div class="absolute top-0 right-0 w-64 h-64 bg-error-container/30 rounded-full blur-[60px] -mr-20 -mt-20 group-hover:scale-110 transition-transform duration-700"></div>
-<header class="flex justify-between items-start mb-6 relative z-10">
-<div class="flex gap-3 items-center bg-error-container text-on-error-container px-3 py-1.5 rounded-full border border-error/20">
-<span class="material-symbols-outlined text-[18px]">warning</span>
-<span class="font-label-caps text-label-caps">High Priority Intervention</span>
-</div>
-<span class="font-body-md text-sm text-outline">Report ID: #AIE-742</span>
-</header>
-<div class="flex flex-col gap-2 mb-8 relative z-10">
-<h2 class="font-headline-md text-headline-md text-on-surface">Spatial Anomaly: Room 203 (North Wing)</h2>
-<p class="font-body-md text-body-md text-on-surface-variant">Continuous baseline power draw detected while spatial occupancy sensors confirm vacancy for &gt; 12 hours. Indicates severe leakage in the HVAC or phantom load from unauthorized appliances.</p>
-</div>
-<div class="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between border-t border-surface-variant pt-6 relative z-10">
-<div class="flex items-center gap-6">
-<div>
-<span class="block font-label-caps text-label-caps text-outline mb-1">Estimated Waste</span>
-<span class="font-headline-md text-error font-medium">1.2 kWh / day</span>
-</div>
-<div class="w-px h-10 bg-surface-variant"></div>
-<div>
-<span class="block font-label-caps text-label-caps text-outline mb-1">AI Action</span>
-<span class="font-headline-md text-on-surface font-medium text-[20px]">Isolate Breaker</span>
-</div>
-</div>
-<button class="bg-surface border border-outline-variant hover:border-primary text-primary px-6 py-2.5 rounded-full font-medium transition-all duration-300 flex items-center gap-2 hover:bg-surface-container-low">
-<span class="material-symbols-outlined text-[20px]">check_circle</span>
-                        Authorize Action
-                    </button>
-</div>
-</article>
-<!-- System Status (Spans 4 columns) -->
-<aside class="col-span-1 md:col-span-4 bg-surface-container-lowest rounded-2xl p-8 shadow-[0px_10px_40px_rgba(31,41,55,0.04)] flex flex-col relative overflow-hidden bg-energy-stream">
-<header class="flex items-center justify-between mb-8 relative z-10">
-<span class="font-label-caps text-label-caps text-tertiary">System Health</span>
-<span class="relative flex h-3 w-3">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-</span>
-</header>
-<div class="flex-grow flex flex-col justify-center items-center text-center relative z-10">
-<div class="w-32 h-32 rounded-full border-[6px] border-surface-container flex items-center justify-center mb-4 relative">
-<svg class="absolute inset-0 w-full h-full -rotate-90" viewbox="0 0 100 100">
-<circle class="text-primary" cx="50" cy="50" fill="none" r="46" stroke="currentColor" stroke-dasharray="289" stroke-dashoffset="20" stroke-linecap="round" stroke-width="6"></circle>
-</svg>
-<span class="font-display-lg text-[36px] text-primary">94%</span>
-</div>
-<h3 class="font-headline-md text-[20px] text-on-surface mb-2">Ecosystem Optimal</h3>
-<p class="font-body-md text-sm text-on-surface-variant">Current configurations are maintaining high efficiency across 85% of physical zones.</p>
-</div>
-</aside>
-<!-- Optimization Suggestion 1 (Spans 6 columns) -->
-<article class="col-span-1 md:col-span-6 bg-surface-container-lowest rounded-2xl p-6 md:p-8 shadow-[0px_10px_40px_rgba(31,41,55,0.04)] border border-transparent hover:border-surface-variant transition-all duration-300 flex flex-col">
-<header class="flex justify-between items-start mb-6">
-<div class="flex gap-2 items-center text-secondary">
-<span class="material-symbols-outlined text-[20px]">air</span>
-<span class="font-label-caps text-label-caps">Protocol Revision</span>
-</div>
-<span class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-1 rounded-md font-label-caps text-[10px]">+14% Efficiency</span>
-</header>
-<div class="flex-grow">
-<h3 class="font-headline-md text-[22px] text-on-surface mb-3">Reduce Exhaust Fan Timeout</h3>
-<p class="font-body-md text-on-surface-variant mb-4">Analysis of the 'South Washroom Block' indicates the current 30-minute post-occupancy fan run-time exceeds required ventilation standards based on humidity dissipation curves.</p>
-<div class="bg-surface-container-low p-4 rounded-xl font-body-md text-sm border-l-4 border-secondary flex flex-col gap-2">
-<div class="flex justify-between">
-<span class="text-outline">Current Parameter:</span>
-<span class="text-on-surface line-through">1800 seconds (30m)</span>
-</div>
-<div class="flex justify-between">
-<span class="text-outline">Suggested Parameter:</span>
-<span class="text-primary font-medium">900 seconds (15m)</span>
-</div>
-</div>
-</div>
-<div class="mt-6 flex justify-end">
-<button class="text-secondary font-medium hover:text-on-secondary-container transition-colors flex items-center gap-1">
-                        Apply Protocol <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-</button>
-</div>
-</article>
-<!-- Optimization Suggestion 2 (Spans 6 columns) -->
-<article class="col-span-1 md:col-span-6 bg-surface-container-lowest rounded-2xl p-6 md:p-8 shadow-[0px_10px_40px_rgba(31,41,55,0.04)] border border-transparent hover:border-surface-variant transition-all duration-300 flex flex-col">
-<header class="flex justify-between items-start mb-6">
-<div class="flex gap-2 items-center text-tertiary">
-<span class="material-symbols-outlined text-[20px]">lightbulb</span>
-<span class="font-label-caps text-label-caps">Luminance Optimization</span>
-</div>
-<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-2.5 py-1 rounded-md font-label-caps text-[10px]">+8% Efficiency</span>
-</header>
-<div class="flex-grow">
-<h3 class="font-headline-md text-[22px] text-on-surface mb-3">Lounge Daylighting Integration</h3>
-<p class="font-body-md text-on-surface-variant mb-4">Solar azimuth data merged with lux sensors in the 'Main Lounge' reveals artificial lighting operates at 100% capacity during peak natural illumination hours (10:00 - 14:00).</p>
-<div class="bg-surface-container-low p-4 rounded-xl font-body-md text-sm border-l-4 border-tertiary flex items-center gap-4">
-<span class="material-symbols-outlined text-tertiary text-[24px]">wb_sunny</span>
-<span class="text-on-surface">Enable progressive dimming curve linked to exterior ambient light levels.</span>
-</div>
-</div>
-<div class="mt-6 flex justify-end">
-<button class="text-tertiary font-medium hover:text-on-tertiary-container transition-colors flex items-center gap-1">
-                        Apply Protocol <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-</button>
-</div>
-</article>
-</div>
+<body class="bg-surface text-on-surface font-sans min-h-screen flex flex-col pt-[72px] selection:bg-green-100">
+<!-- Nav placeholder — replaced by build.js -->
+<nav class="fixed top-0 w-full z-50 bg-white border-b border-surface-variant/30"></nav>
+
+<main class="flex-grow flex flex-col w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-zone-padding gap-cluster-gap">
+
+  <!-- Header -->
+  <header class="flex flex-col gap-3 max-w-3xl fade-up fade-up-1">
+    <div class="flex items-center gap-2.5 text-primary">
+      <span class="material-symbols-outlined filled text-[26px]">robot_2</span>
+      <span class="text-xs font-semibold tracking-widest uppercase">Sustainability Intelligence Unit</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold text-on-surface leading-tight tracking-tight">
+      AI Energy Advisor
+    </h1>
+    <p class="text-on-surface-variant text-base leading-relaxed">
+      Real-time spatial analysis of energy anomalies and automated optimization recommendations. The AI continuously monitors all zones, surfaces inefficiencies, and proposes actionable fixes.
+    </p>
+  </header>
+
+  <!-- Bento Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-cluster-gap fade-up fade-up-2">
+
+    <!-- High Priority Alert — 8 cols -->
+    <article class="col-span-1 md:col-span-8 bg-white rounded-2xl p-7 card-shadow relative overflow-hidden group hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between border border-transparent hover:border-red-100">
+      <!-- Ambient glow -->
+      <div class="absolute top-0 right-0 w-56 h-56 bg-error-container/25 rounded-full blur-[50px] -mr-16 -mt-16 group-hover:scale-110 transition-transform duration-700 pointer-events-none"></div>
+
+      <header class="flex justify-between items-start mb-5 relative z-10">
+        <div class="flex gap-2.5 items-center bg-error-container text-on-error-container px-3 py-1.5 rounded-full border border-error/20">
+          <span class="material-symbols-outlined text-[16px]">warning</span>
+          <span class="text-xs font-bold tracking-wider uppercase">High Priority Intervention</span>
+        </div>
+        <span class="text-xs text-outline bg-surface-container-low px-2 py-1 rounded-lg">Report #AIE-742</span>
+      </header>
+
+      <div class="flex flex-col gap-2 mb-7 relative z-10">
+        <h2 class="text-xl font-bold text-on-surface leading-snug">Spatial Anomaly: Room 203 — North Wing</h2>
+        <p class="text-on-surface-variant text-sm leading-relaxed">
+          Continuous baseline power draw detected while occupancy sensors confirm vacancy for &gt;12 hours. Indicates HVAC leakage or phantom load from unauthorized appliances.
+        </p>
+      </div>
+
+      <div class="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between border-t border-surface-variant pt-5 relative z-10">
+        <div class="flex items-center gap-6">
+          <div>
+            <span class="block text-xs text-outline font-semibold uppercase tracking-wider mb-1">Estimated Waste</span>
+            <span class="text-error font-bold text-lg">1.2 kWh / day</span>
+          </div>
+          <div class="w-px h-10 bg-surface-variant"></div>
+          <div>
+            <span class="block text-xs text-outline font-semibold uppercase tracking-wider mb-1">AI Action</span>
+            <span class="font-bold text-on-surface text-base">Isolate Breaker</span>
+          </div>
+        </div>
+        <button class="authorize-btn bg-white border border-outline-variant hover:border-primary text-primary px-5 py-2.5 rounded-full font-semibold transition-all duration-300 flex items-center gap-2 text-sm hover:bg-surface-container-low whitespace-nowrap"
+          onclick="authorizeAction(this, 'Breaker isolated — Room 203 energy supply suspended.')">
+          <span class="material-symbols-outlined text-[18px]">check_circle</span>
+          Authorize Action
+        </button>
+      </div>
+    </article>
+
+    <!-- System Health — 4 cols -->
+    <aside class="col-span-1 md:col-span-4 bg-white rounded-2xl p-7 card-shadow flex flex-col relative overflow-hidden bg-energy-gradient border border-surface-variant/30">
+      <header class="flex items-center justify-between mb-6">
+        <span class="text-xs font-semibold tracking-widest uppercase text-tertiary">System Health</span>
+        <span class="relative flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+        </span>
+      </header>
+
+      <div class="flex-grow flex flex-col justify-center items-center text-center gap-3">
+        <div class="relative w-32 h-32 flex items-center justify-center">
+          <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="44" fill="none" stroke="#ecefe9" stroke-width="8"/>
+            <circle cx="50" cy="50" r="44" fill="none" stroke="#006e2f"
+              stroke-dasharray="276" stroke-dashoffset="16" stroke-linecap="round" stroke-width="8"
+              class="transition-all duration-1000"/>
+          </svg>
+          <span class="text-3xl font-bold text-primary">94%</span>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-on-surface">Ecosystem Optimal</h3>
+          <p class="text-xs text-on-surface-variant mt-1 max-w-[180px]">High efficiency maintained across 85% of zones</p>
+        </div>
+
+        <!-- Mini stats -->
+        <div class="w-full grid grid-cols-2 gap-2 mt-2">
+          <div class="bg-surface-container-low rounded-xl p-3 text-center">
+            <div class="text-lg font-bold text-primary">47</div>
+            <div class="text-[10px] text-on-surface-variant">Zones Active</div>
+          </div>
+          <div class="bg-surface-container-low rounded-xl p-3 text-center">
+            <div class="text-lg font-bold text-green-600">3</div>
+            <div class="text-[10px] text-on-surface-variant">Alerts Open</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Protocol 1 — 6 cols -->
+    <article class="col-span-1 md:col-span-6 bg-white rounded-2xl p-6 card-shadow border border-transparent hover:border-surface-variant transition-all duration-300 flex flex-col fade-up fade-up-3">
+      <header class="flex justify-between items-start mb-5">
+        <div class="flex gap-2 items-center text-secondary">
+          <span class="material-symbols-outlined text-[20px]">air</span>
+          <span class="text-xs font-semibold uppercase tracking-wider">Protocol Revision</span>
+        </div>
+        <span class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-1 rounded-lg text-[10px] font-bold">+14% Efficiency</span>
+      </header>
+
+      <div class="flex-grow">
+        <h3 class="text-lg font-bold text-on-surface mb-2">Reduce Exhaust Fan Timeout</h3>
+        <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">South Washroom Block's 30-minute post-occupancy fan run-time exceeds humidity dissipation curve requirements by 50%.</p>
+
+        <div class="bg-surface-container-low p-4 rounded-xl text-sm border-l-4 border-secondary space-y-2">
+          <div class="flex justify-between">
+            <span class="text-outline">Current:</span>
+            <span class="text-on-surface line-through">1800 seconds (30m)</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-outline">Suggested:</span>
+            <span class="text-primary font-semibold">900 seconds (15m)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5 flex justify-end">
+        <button class="authorize-btn text-secondary font-semibold hover:text-on-secondary-container transition-colors flex items-center gap-1 text-sm"
+          onclick="authorizeAction(this, 'Fan timeout updated to 900 seconds.')">
+          Apply Protocol <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- Protocol 2 — 6 cols -->
+    <article class="col-span-1 md:col-span-6 bg-white rounded-2xl p-6 card-shadow border border-transparent hover:border-surface-variant transition-all duration-300 flex flex-col fade-up fade-up-4">
+      <header class="flex justify-between items-start mb-5">
+        <div class="flex gap-2 items-center text-tertiary">
+          <span class="material-symbols-outlined text-[20px]">lightbulb</span>
+          <span class="text-xs font-semibold uppercase tracking-wider">Luminance Optimization</span>
+        </div>
+        <span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-2.5 py-1 rounded-lg text-[10px] font-bold">+8% Efficiency</span>
+      </header>
+
+      <div class="flex-grow">
+        <h3 class="text-lg font-bold text-on-surface mb-2">Lounge Daylighting Integration</h3>
+        <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">Solar azimuth merged with lux sensors shows artificial lighting runs at 100% during peak natural light hours (10:00–14:00).</p>
+
+        <div class="bg-surface-container-low p-4 rounded-xl text-sm border-l-4 border-tertiary flex items-center gap-3">
+          <span class="material-symbols-outlined text-tertiary text-[22px]">wb_sunny</span>
+          <span class="text-on-surface">Enable progressive dimming curve linked to exterior ambient lux levels.</span>
+        </div>
+      </div>
+
+      <div class="mt-5 flex justify-end">
+        <button class="authorize-btn text-tertiary font-semibold hover:text-on-tertiary-container transition-colors flex items-center gap-1 text-sm"
+          onclick="authorizeAction(this, 'Daylighting curve enabled for Main Lounge.')">
+          Apply Protocol <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </button>
+      </div>
+    </article>
+
+  </div>
 </main>
-<!-- Footer -->
-<footer class="w-full py-zone-padding mt-zone-padding bg-surface-container-low dark:bg-surface-container-lowest">
-<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-cluster-gap max-w-max-width mx-auto">
-<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">
-                DORMPULSE
-            </div>
-<div class="flex flex-wrap justify-center gap-6">
-<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-outline-variant hover:underline decoration-primary dark:decoration-primary-fixed transition-all duration-200" href="#">Energy Protocol</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-outline-variant hover:underline decoration-primary dark:decoration-primary-fixed transition-all duration-200" href="#">Privacy Policy</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-outline-variant hover:underline decoration-primary dark:decoration-primary-fixed transition-all duration-200" href="#">Impact Report</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-outline-variant hover:underline decoration-primary dark:decoration-primary-fixed transition-all duration-200" href="#">Support</a>
-</div>
-<div class="font-label-caps text-label-caps text-on-surface-variant dark:text-outline-variant text-center md:text-right">
-                © 2024 DormPulse Ecosystem. Powered by AI for a greener planet.
-            </div>
-</div>
+
+<!-- Footer placeholder — replaced by build.js -->
+<footer class="w-full py-zone-padding mt-zone-padding bg-surface-container-low/50 border-t border-surface-variant/20">
+  <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop flex justify-between items-center">
+    <span class="font-bold text-primary">ENERVIA</span>
+    <span class="text-xs text-on-surface-variant">© 2026 Enervia. Powered by AI for a greener planet.</span>
+  </div>
 </footer>
-</body></html>
+
+<script>
+  function authorizeAction(btn, successMsg) {
+    btn.classList.add('loading');
+    btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">sync</span> Applying...';
+    setTimeout(() => {
+      btn.classList.remove('loading');
+      btn.classList.add('done');
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span> Applied';
+      btn.disabled = true;
+    }, 1800);
+  }
+</script>
+</body>
+</html>

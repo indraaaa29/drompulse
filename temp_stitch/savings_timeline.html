@@ -1,267 +1,367 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Savings Timeline - Enervia</title>
+<meta name="description" content="Enervia Savings Timeline — Track weekly and monthly energy savings with interactive charts and cost projections."/>
+<meta name="theme-color" content="#006e2f"/>
+<title>Savings Timeline — Enervia</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "surface-container-low": "#f2f4ee",
-                        "surface-variant": "#e1e3dd",
-                        "on-tertiary": "#ffffff",
-                        "on-tertiary-fixed": "#00210a",
-                        "on-surface": "#191c19",
-                        "surface-dim": "#d8dbd5",
-                        "surface-bright": "#f8faf4",
-                        "primary-fixed": "#6bff8f",
-                        "tertiary-fixed-dim": "#79db8d",
-                        "surface-container-highest": "#e1e3dd",
-                        "on-primary": "#ffffff",
-                        "tertiary": "#006d30",
-                        "on-error": "#ffffff",
-                        "outline-variant": "#bccbb9",
-                        "tertiary-fixed": "#95f8a7",
-                        "on-primary-fixed-variant": "#005321",
-                        "on-primary-fixed": "#002109",
-                        "primary": "#006e2f",
-                        "primary-container": "#22c55e",
-                        "on-background": "#191c19",
-                        "background": "#f8faf4",
-                        "on-secondary-fixed": "#001e2c",
-                        "error": "#ba1a1a",
-                        "secondary": "#00668a",
-                        "secondary-container": "#40c2fd",
-                        "secondary-fixed-dim": "#7bd0ff",
-                        "on-tertiary-container": "#004a1f",
-                        "outline": "#6d7b6c",
-                        "surface-container": "#ecefe9",
-                        "on-secondary-fixed-variant": "#004c69",
-                        "on-secondary-container": "#004d6a",
-                        "on-secondary": "#ffffff",
-                        "tertiary-container": "#5ebf74",
-                        "inverse-on-surface": "#eff1ec",
-                        "secondary-fixed": "#c4e7ff",
-                        "inverse-primary": "#4ae176",
-                        "on-surface-variant": "#3d4a3d",
-                        "on-primary-container": "#004b1e",
-                        "surface-container-high": "#e7e9e3",
-                        "error-container": "#ffdad6",
-                        "primary-fixed-dim": "#4ae176",
-                        "surface-tint": "#006e2f",
-                        "on-tertiary-fixed-variant": "#005323",
-                        "surface-container-lowest": "#ffffff",
-                        "inverse-surface": "#2e312e",
-                        "surface": "#f8faf4",
-                        "on-error-container": "#93000a"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px",
-                        "blob": "30% 70% 70% 30% / 30% 30% 70% 70%"
-                    },
-                    "spacing": {
-                        "max-width": "1440px",
-                        "margin-desktop": "5rem",
-                        "cluster-gap": "2rem",
-                        "zone-padding": "3rem",
-                        "margin-mobile": "1.5rem",
-                        "unit": "8px"
-                    },
-                    "fontFamily": {
-                        "body-md": ["Outfit", "sans-serif"],
-                        "body-lg": ["Outfit", "sans-serif"],
-                        "display-lg": ["Outfit", "sans-serif"],
-                        "label-caps": ["Outfit", "sans-serif"],
-                        "headline-md": ["Outfit", "sans-serif"],
-                        "display-lg-mobile": ["Outfit", "sans-serif"]
-                    },
-                    "fontSize": {
-                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                        "body-lg": ["18px", {"lineHeight": "1.7", "letterSpacing": "0.01em", "fontWeight": "400"}],
-                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
-                        "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600"}],
-                        "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
-                        "display-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "600"}]
-                    }
-                }
-            }
+  tailwind.config = {
+    theme: {
+      extend: {
+        "colors": {
+          "primary": "#006e2f",
+          "primary-container": "#22c55e",
+          "on-primary": "#ffffff",
+          "secondary": "#00668a",
+          "secondary-container": "#40c2fd",
+          "on-secondary": "#ffffff",
+          "tertiary": "#006d30",
+          "tertiary-container": "#5ebf74",
+          "on-tertiary": "#ffffff",
+          "background": "#f8faf4",
+          "on-background": "#00210a",
+          "surface": "#f8faf4",
+          "on-surface": "#191c19",
+          "surface-container": "#ecefe9",
+          "surface-container-low": "#f2f4ee",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-high": "#e7e9e3",
+          "surface-container-highest": "#e1e3dd",
+          "on-surface-variant": "#3d4a3d",
+          "outline": "#6d7b6c",
+          "outline-variant": "#bccbb9",
+          "error": "#ba1a1a",
+          "error-container": "#ffdad6",
+          "on-error": "#ffffff",
+          "on-error-container": "#93000a",
+          "surface-variant": "#e1e3dd"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.5rem",
+          "lg": "0.75rem",
+          "xl": "1rem",
+          "2xl": "1.5rem",
+          "3xl": "2rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "max-width": "1280px",
+          "margin-desktop": "4rem",
+          "cluster-gap": "1.75rem",
+          "zone-padding": "2.5rem",
+          "margin-mobile": "1.25rem"
+        },
+        "fontFamily": {
+          "sans": ["Outfit", "sans-serif"]
         }
-    </script>
+      }
+    }
+  }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <style>
-        body { background-color: #f8faf4; }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-        .organic-shadow {
-            box-shadow: 0px 10px 40px rgba(31, 41, 55, 0.04);
-        }
-        .tendril { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: grow 3s ease-out forwards; }
-        @keyframes grow { to { stroke-dashoffset: 0; } }
-        .pulse-dot { animation: pulse 2s infinite; }
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 0; }
-        }
-        .float-anim { animation: float 6s ease-in-out infinite; }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-    </style>
+  body { font-family: 'Outfit', sans-serif; background-color: #f8faf4; }
+  .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1; }
+
+  .glass-panel {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .organic-shadow { box-shadow: 0 4px 24px rgba(0,110,47,0.06), 0 1px 4px rgba(0,0,0,0.04); }
+
+  .tendril { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: grow 2.5s ease-out forwards; }
+  @keyframes grow { to { stroke-dashoffset: 0; } }
+
+  .float-anim { animation: float 6s ease-in-out infinite; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .bar-enter {
+    animation: barGrow 0.5s ease-out forwards;
+    transform-origin: bottom;
+  }
+  @keyframes barGrow {
+    from { transform: scaleY(0); opacity: 0; }
+    to { transform: scaleY(1); opacity: 1; }
+  }
+
+  .view-btn {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem; border-radius: 0.75rem;
+    border: 1px solid transparent;
+    transition: all 0.25s;
+    cursor: pointer; width: 100%; text-align: left;
+  }
+  .view-btn.active {
+    border-color: rgba(0,110,47,0.2);
+    background: rgba(0,110,47,0.05);
+    color: #006e2f;
+  }
+  .view-btn:not(.active) {
+    color: #3d4a3d;
+  }
+  .view-btn:not(.active):hover {
+    background: rgba(0,0,0,0.03);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.5s ease-out forwards; }
+</style>
 </head>
-<body class="text-on-surface antialiased pt-24 min-h-screen flex flex-col">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/80 dark:bg-surface-dim/80 shadow-[0px_10px_40px_rgba(31,41,55,0.04)]">
-<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-max-width mx-auto">
-<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary tracking-tighter">
-                DORMPULSE
-            </div>
-<div class="hidden md:flex gap-6 items-center">
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-body-md text-body-md tracking-tight" href="#">Overview</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-body-md text-body-md tracking-tight" href="#">Hostel Map</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-body-md text-body-md tracking-tight" href="#">Flow</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-body-md text-body-md tracking-tight" href="#">Impact</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-body-md text-body-md tracking-tight" href="#">AI Advisor</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-body-md text-body-md tracking-tight" href="#">Heatmap</a>
-<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md tracking-tight" href="#">Savings</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-body-md text-body-md tracking-tight" href="#">Automation</a>
-<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-body-md text-body-md tracking-tight" href="#">SDG 7</a>
-</div>
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-primary cursor-pointer hover:text-primary-container transition-colors" data-weight="fill" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
-<span class="material-symbols-outlined text-primary cursor-pointer hover:text-primary-container transition-colors" data-weight="fill" style="font-variation-settings: 'FILL' 1;">account_circle</span>
-<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-caps text-label-caps hover:bg-tertiary transition-colors duration-300">
-                    Optimize Now
-                </button>
-</div>
-</div>
-</nav>
-<!-- Main Content Canvas -->
-<main class="flex-grow w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-zone-padding">
-<!-- Header Section -->
-<div class="mb-cluster-gap">
-<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-2">Energy Ecosystem</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-                Watch your energy savings cultivate a digital garden. The denser the foliage, the greater your hostel's efficiency and environmental impact.
-            </p>
-</div>
-<!-- Ecosystem View (The Garden) -->
-<div class="glass-panel rounded-[2rem] p-8 organic-shadow mb-zone-padding relative overflow-hidden min-h-[500px] flex items-center justify-center">
-<!-- Abstract Garden Visualization -->
-<div class="absolute inset-0 z-0 opacity-20" style="background-image: radial-gradient(circle at 50% 50%, #4ae176 0%, transparent 70%);"></div>
-<svg class="absolute inset-0 w-full h-full z-10 pointer-events-none" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 500">
-<!-- Tendril 1 (Base growth) -->
-<path class="tendril" d="M 100,500 C 150,400 200,300 300,250 C 400,200 500,250 600,150" fill="none" stroke="#22c55e" stroke-linecap="round" stroke-width="4"></path>
-<!-- Tendril 2 (Branching out) -->
-<path class="tendril" d="M 300,250 C 350,150 400,100 500,80" fill="none" stroke="#5ebf74" stroke-linecap="round" stroke-width="3" style="animation-delay: 0.5s;"></path>
-<!-- Tendril 3 (New growth) -->
-<path class="tendril" d="M 600,150 C 700,100 800,150 900,50" fill="none" stroke="#4ae176" stroke-linecap="round" stroke-width="2" style="animation-delay: 1s;"></path>
-</svg>
-<!-- Data Nodes Floating in the Garden -->
-<div id="timeline-cards" class="z-20 w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-cluster-gap">
-<!-- Node 1: Daily -->
-<div class="bg-surface rounded-3xl p-6 organic-shadow float-anim relative">
-<div class="absolute -top-3 -right-3 w-6 h-6 bg-primary-container rounded-full flex items-center justify-center">
-<div class="absolute inset-0 bg-primary-container rounded-full pulse-dot"></div>
-<span class="material-symbols-outlined text-[12px] text-on-primary">eco</span>
-</div>
-<h3 class="font-label-caps text-label-caps text-outline mb-4">TODAY'S SEEDLINGS</h3>
-<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-1">12<span class="text-headline-md font-headline-md text-surface-tint">kWh</span></div>
-<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
-<span class="material-symbols-outlined text-primary-container text-sm">trending_down</span>
-                        15% less than yesterday
-                    </p>
-</div>
-<!-- Node 2: Weekly -->
-<div class="bg-surface rounded-3xl p-6 organic-shadow float-anim relative" style="animation-delay: 1s;">
-<h3 class="font-label-caps text-label-caps text-outline mb-4">WEEKLY CANOPY</h3>
-<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-tertiary mb-1">84<span class="text-headline-md font-headline-md text-surface-tint">kWh</span></div>
-<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
-<span class="material-symbols-outlined text-primary-container text-sm">trending_down</span>
-                        Saved 4 trees this week
-                    </p>
-</div>
-<!-- Node 3: Monthly -->
-<div class="bg-surface rounded-3xl p-6 organic-shadow float-anim relative" style="animation-delay: 2s;">
-<div class="absolute top-4 right-4 bg-tertiary-container/20 text-tertiary px-3 py-1 rounded-full font-label-caps text-[10px]">PEAK</div>
-<h3 class="font-label-caps text-label-caps text-outline mb-4">MONTHLY FOREST</h3>
-<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-1">340<span class="text-headline-md font-headline-md text-surface-tint">kWh</span></div>
-<p class="font-body-md text-body-md text-on-surface-variant">
-                        Equivalent to powering a small village for a day.
-                    </p>
-</div>
-</div>
-</div>
-<!-- Controls & Metrics Cluster -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-cluster-gap">
-<!-- Timeline Selector -->
-<div class="col-span-1 lg:col-span-4 bg-surface-container-lowest rounded-3xl p-8 organic-shadow flex flex-col justify-center">
-<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Growth Timeline</h2>
-<div class="flex flex-col gap-4">
-<button class="flex items-center justify-between p-4 rounded-xl border border-primary/20 bg-primary/5 text-primary transition-all group">
-<span class="font-body-lg text-body-lg font-medium">Daily View</span>
-<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</button>
-<button class="flex items-center justify-between p-4 rounded-xl border border-transparent hover:bg-surface-variant/50 text-on-surface-variant transition-all group">
-<span class="font-body-lg text-body-lg">Weekly View</span>
-<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">arrow_forward</span>
-</button>
-<button class="flex items-center justify-between p-4 rounded-xl border border-transparent hover:bg-surface-variant/50 text-on-surface-variant transition-all group">
-<span class="font-body-lg text-body-lg">Monthly View</span>
-<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">arrow_forward</span>
-</button>
-</div>
-</div>
-<!-- Insight Bento Box -->
-<div class="col-span-1 lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-<div class="bg-surface-container-lowest rounded-3xl p-8 organic-shadow flex flex-col justify-between">
-<div>
-<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-<span class="material-symbols-outlined text-primary">psychiatry</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Lounge Oasis</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">The South Wing Lounge automation has matured beautifully, saving 22% more energy this week compared to last.</p>
-</div>
-</div>
-<div class="bg-surface-container-lowest rounded-3xl p-8 organic-shadow flex flex-col justify-between">
-<div>
-<div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mb-4">
-<span class="material-symbols-outlined text-secondary">water_drop</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Water Circulation</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Smart pump scheduling has created a steady, efficient flow, mimicking natural aquifer behavior.</p>
-</div>
-</div>
-</div>
-</div>
+<body class="text-on-surface antialiased min-h-screen flex flex-col pt-[72px]">
+<!-- Nav placeholder — replaced by build.js -->
+<nav class="fixed top-0 w-full z-50 bg-white border-b border-surface-variant/30"></nav>
+
+<main class="flex-grow w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-zone-padding flex flex-col gap-cluster-gap">
+
+  <!-- Header -->
+  <header class="flex flex-col gap-2">
+    <div class="flex items-center gap-2 text-primary/70">
+      <span class="material-symbols-outlined text-sm filled">bar_chart</span>
+      <span class="text-xs font-semibold tracking-widest uppercase">Savings Intelligence</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold text-on-surface tracking-tight">Energy Savings Timeline</h1>
+    <p class="text-on-surface-variant text-base max-w-2xl">
+      Track how your hostel's energy-saving protocols cultivate measurable, lasting impact over time.
+    </p>
+  </header>
+
+  <!-- Summary KPI Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-cluster-gap">
+    <div class="bg-white rounded-3xl p-6 organic-shadow float-anim relative overflow-hidden">
+      <div class="absolute -top-2 -right-2 w-5 h-5 bg-primary-container rounded-full flex items-center justify-center">
+        <div class="absolute inset-0 bg-primary-container rounded-full animate-ping opacity-50"></div>
+        <span class="material-symbols-outlined text-[10px] text-white filled">eco</span>
+      </div>
+      <p class="text-xs font-semibold tracking-widest uppercase text-on-surface-variant mb-3">Today's Savings</p>
+      <div class="text-4xl font-bold text-primary mb-1">12<span class="text-xl font-semibold text-on-surface-variant ml-1">kWh</span></div>
+      <p class="text-sm text-green-600 font-medium flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">trending_down</span> 15% less than yesterday
+      </p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-6 organic-shadow float-anim relative" style="animation-delay: 0.8s;">
+      <p class="text-xs font-semibold tracking-widest uppercase text-on-surface-variant mb-3">This Week</p>
+      <div class="text-4xl font-bold text-tertiary mb-1">84<span class="text-xl font-semibold text-on-surface-variant ml-1">kWh</span></div>
+      <p class="text-sm text-green-600 font-medium flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">park</span> Equivalent to 4 trees saved
+      </p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-6 organic-shadow float-anim relative" style="animation-delay: 1.6s;">
+      <div class="absolute top-4 right-4 bg-tertiary-container/30 text-tertiary px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide">Peak</div>
+      <p class="text-xs font-semibold tracking-widest uppercase text-on-surface-variant mb-3">This Month</p>
+      <div class="text-4xl font-bold text-primary mb-1">340<span class="text-xl font-semibold text-on-surface-variant ml-1">kWh</span></div>
+      <p class="text-sm text-on-surface-variant">Powers a small village for a full day</p>
+    </div>
+  </div>
+
+  <!-- Chart + Controls -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-cluster-gap">
+
+    <!-- View Selector -->
+    <div class="col-span-1 lg:col-span-4 bg-white rounded-3xl p-7 organic-shadow flex flex-col gap-6">
+      <div>
+        <h2 class="text-lg font-semibold text-on-surface">Growth Timeline</h2>
+        <p class="text-sm text-on-surface-variant mt-1">Select a view to explore energy trends</p>
+      </div>
+
+      <div class="flex flex-col gap-3" id="timeline-controls">
+        <button id="view-daily" class="view-btn active" onclick="setView('daily')">
+          <div>
+            <span class="font-semibold text-sm block">Daily View</span>
+            <span class="text-xs text-on-surface-variant">Hourly breakdown</span>
+          </div>
+          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </button>
+        <button id="view-weekly" class="view-btn" onclick="setView('weekly')">
+          <div>
+            <span class="font-semibold text-sm block">Weekly View</span>
+            <span class="text-xs text-on-surface-variant">7-day comparison</span>
+          </div>
+          <span class="material-symbols-outlined text-[18px] opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+        </button>
+        <button id="view-monthly" class="view-btn" onclick="setView('monthly')">
+          <div>
+            <span class="font-semibold text-sm block">Monthly View</span>
+            <span class="text-xs text-on-surface-variant">Long-term trends</span>
+          </div>
+          <span class="material-symbols-outlined text-[18px] opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+        </button>
+      </div>
+
+      <!-- Cost savings widget -->
+      <div class="mt-auto bg-surface-container-low rounded-2xl p-4 border border-surface-variant/50">
+        <p class="text-xs font-semibold tracking-widest uppercase text-on-surface-variant mb-2">Cost Saved</p>
+        <div id="cost-display" class="text-2xl font-bold text-primary">₹ 4,230</div>
+        <p id="cost-label" class="text-xs text-on-surface-variant mt-1">Today's estimated savings</p>
+      </div>
+    </div>
+
+    <!-- Chart Panel -->
+    <div class="col-span-1 lg:col-span-8 bg-white rounded-3xl p-7 organic-shadow flex flex-col gap-5">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 id="chart-title" class="text-lg font-semibold text-on-surface">Hourly Usage Today</h2>
+          <p id="chart-subtitle" class="text-sm text-on-surface-variant mt-0.5">kWh consumed per hour</p>
+        </div>
+        <div class="flex items-center gap-4 text-xs">
+          <div class="flex items-center gap-1.5">
+            <div class="w-3 h-3 rounded-full bg-primary/30"></div>
+            <span class="text-on-surface-variant">Usage</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <div class="w-3 h-3 rounded-full bg-primary"></div>
+            <span class="text-on-surface-variant">Savings</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SVG Bar Chart -->
+      <div class="relative flex-grow min-h-[220px] flex items-end gap-1.5 px-2 pt-4" id="chart-container">
+        <!-- Bars injected by JS -->
+      </div>
+
+      <!-- X-axis labels -->
+      <div class="flex justify-between px-2 text-[10px] text-on-surface-variant font-medium" id="chart-labels">
+      </div>
+    </div>
+  </div>
+
+  <!-- Insight Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-cluster-gap">
+    <div class="bg-white rounded-3xl p-6 organic-shadow">
+      <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+        <span class="material-symbols-outlined text-primary">psychiatry</span>
+      </div>
+      <h3 class="text-base font-semibold text-on-surface mb-2">Lounge Automation Win</h3>
+      <p class="text-sm text-on-surface-variant">South Wing Lounge automation saved <strong class="text-primary">22% more energy</strong> this week vs last week — driven by occupancy-based AC scheduling.</p>
+    </div>
+    <div class="bg-white rounded-3xl p-6 organic-shadow">
+      <div class="w-10 h-10 bg-secondary/10 rounded-xl flex items-center justify-center mb-4">
+        <span class="material-symbols-outlined text-secondary">water_drop</span>
+      </div>
+      <h3 class="text-base font-semibold text-on-surface mb-2">Smart Pump Scheduling</h3>
+      <p class="text-sm text-on-surface-variant">Water pump scheduling aligned with off-peak hours, reducing energy cost by <strong class="text-secondary">₹ 890</strong> this week across all blocks.</p>
+    </div>
+  </div>
+
 </main>
-<!-- Footer -->
-<footer class="w-full py-zone-padding mt-zone-padding bg-surface-container-low dark:bg-surface-container-lowest">
-<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop gap-cluster-gap max-w-max-width mx-auto">
-<div class="font-headline-md text-headline-md text-primary">DORMPULSE</div>
-<div class="flex gap-6 flex-wrap justify-center">
-<a class="text-on-surface-variant hover:underline decoration-primary transition-all duration-200 font-label-caps text-label-caps" href="#">Energy Protocol</a>
-<a class="text-on-surface-variant hover:underline decoration-primary transition-all duration-200 font-label-caps text-label-caps" href="#">Privacy Policy</a>
-<a class="text-on-surface-variant hover:underline decoration-primary transition-all duration-200 font-label-caps text-label-caps" href="#">Impact Report</a>
-<a class="text-on-surface-variant hover:underline decoration-primary transition-all duration-200 font-label-caps text-label-caps" href="#">Support</a>
-</div>
-<div class="text-on-surface-variant font-label-caps text-label-caps text-center md:text-right">
-                © 2024 DormPulse Ecosystem. Powered by AI for a greener planet.
-            </div>
-</div>
+
+<!-- Footer placeholder — replaced by build.js -->
+<footer class="w-full py-zone-padding mt-zone-padding bg-surface-container-low/50 border-t border-surface-variant/20">
+  <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop flex justify-between items-center">
+    <span class="font-bold text-primary">ENERVIA</span>
+    <span class="text-xs text-on-surface-variant">© 2026 Enervia. Powered by AI for a greener planet.</span>
+  </div>
 </footer>
-</body></html>
+
+<script>
+  const views = {
+    daily: {
+      title: 'Hourly Usage Today',
+      subtitle: 'kWh consumed per hour',
+      labels: ['6am','8am','10am','12pm','2pm','4pm','6pm','8pm','10pm','Now'],
+      data:   [2.1, 3.4, 5.8, 7.2, 6.4, 5.1, 6.8, 8.2, 5.5, 4.1],
+      savings:[0.4, 0.6, 1.2, 1.8, 1.5, 1.0, 1.4, 2.0, 1.2, 0.9],
+      cost: '₹ 4,230',
+      costLabel: "Today's estimated savings"
+    },
+    weekly: {
+      title: 'Daily Usage This Week',
+      subtitle: 'kWh consumed per day',
+      labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+      data:   [42, 38, 51, 45, 48, 35, 29],
+      savings:[8,  10, 7,  9,  11, 13, 14],
+      cost: '₹ 29,400',
+      costLabel: "This week's total savings"
+    },
+    monthly: {
+      title: 'Weekly Usage This Month',
+      subtitle: 'kWh consumed per week',
+      labels: ['Wk 1','Wk 2','Wk 3','Wk 4'],
+      data:   [310, 285, 340, 290],
+      savings:[42,  55,  48,  61],
+      cost: '₹ 1,24,000',
+      costLabel: "This month's total savings"
+    }
+  };
+
+  let currentView = 'daily';
+
+  function setView(view) {
+    currentView = view;
+
+    // Update button states
+    ['daily','weekly','monthly'].forEach(v => {
+      const btn = document.getElementById('view-' + v);
+      if (!btn) return;
+      if (v === view) {
+        btn.className = 'view-btn active';
+      } else {
+        btn.className = 'view-btn';
+      }
+    });
+
+    const vd = views[view];
+
+    // Update chart title
+    const titleEl = document.getElementById('chart-title');
+    const subtitleEl = document.getElementById('chart-subtitle');
+    if (titleEl) titleEl.textContent = vd.title;
+    if (subtitleEl) subtitleEl.textContent = vd.subtitle;
+
+    // Update cost
+    const costEl = document.getElementById('cost-display');
+    const costLabelEl = document.getElementById('cost-label');
+    if (costEl) costEl.textContent = vd.cost;
+    if (costLabelEl) costLabelEl.textContent = vd.costLabel;
+
+    // Render bars
+    renderChart(vd);
+
+    // Render labels
+    const labelsEl = document.getElementById('chart-labels');
+    if (labelsEl) {
+      labelsEl.innerHTML = vd.labels.map(l => `<span>${l}</span>`).join('');
+    }
+  }
+
+  function renderChart(vd) {
+    const container = document.getElementById('chart-container');
+    if (!container) return;
+
+    const maxVal = Math.max(...vd.data, ...vd.savings);
+
+    container.innerHTML = vd.data.map((val, i) => {
+      const heightPct = Math.round((val / maxVal) * 100);
+      const savingsPct = Math.round((vd.savings[i] / maxVal) * 100);
+      const delay = i * 0.06;
+      return `
+        <div class="flex-1 flex flex-col items-center justify-end gap-0.5 h-full">
+          <div class="w-full flex flex-col justify-end gap-0.5" style="height: 100%;">
+            <div class="w-full bg-primary rounded-t-md bar-enter"
+                style="height: ${heightPct}%; animation-delay: ${delay}s; min-height: 4px;"
+                title="${val} kWh"></div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setView('daily');
+  });
+</script>
+</body>
+</html>

@@ -1,7 +1,29 @@
 {
   "name": "enervia",
   "version": "1.0.0",
-  "description": "Enervia Eco-Energy Ecosystem",
+  "description": "Enervia — AI-powered Smart Hostel Energy Management Platform. Smarter Energy. Greener Living.",
+  "keywords": [
+    "energy-management",
+    "sustainability",
+    "sdg7",
+    "hostel",
+    "iot",
+    "ai",
+    "smart-building",
+    "clean-energy",
+    "occupancy-monitoring",
+    "dashboard"
+  ],
+  "homepage": "https://github.com/indraaaa29/Enervia#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/indraaaa29/Enervia.git"
+  },
+  "bugs": {
+    "url": "https://github.com/indraaaa29/Enervia/issues"
+  },
+  "license": "MIT",
+  "author": "Enervia Contributors",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,5 +35,8 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "vite": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
