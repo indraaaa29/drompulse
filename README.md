@@ -113,7 +113,6 @@ Enervia/
 ├── ai_advisor.html           # ← Built output
 ├── sustainability_impact.html# ← Built output
 │
-├── agentation-mount.js       # AI agent integration
 ├── .github/
 │   ├── workflows/ci.yml      # Automated CI pipeline
 │   ├── ISSUE_TEMPLATE/       # Bug + feature templates

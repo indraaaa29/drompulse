@@ -31,7 +31,6 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "agentation": "^3.0.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "vite": "^5.0.0"

@@ -314,7 +314,7 @@ screens.forEach(screen => {
   html = html.replace(/<footer[^>]*>[\s\S]*?<\/footer>/, footerHtml);
 
   // 6. Inject Global Interactivity Modal and script before closing </body>
-  html = html.replace('</body>', `${optimizeModalHtml}\n<script type="module" src="/agentation-mount.js"></script>\n</body>`);
+  html = html.replace('</body>', `${optimizeModalHtml}\n</body>`);
 
   // 7. Page specific interactivity features
   if (screen.dest === 'index.html') {
