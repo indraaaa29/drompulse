@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DormPulse - About SDG 7</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f2f4ee",
+                        "surface-variant": "#e1e3dd",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#00210a",
+                        "on-surface": "#191c19",
+                        "surface-dim": "#d8dbd5",
+                        "surface-bright": "#f8faf4",
+                        "primary-fixed": "#6bff8f",
+                        "tertiary-fixed-dim": "#79db8d",
+                        "surface-container-highest": "#e1e3dd",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#006d30",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#bccbb9",
+                        "tertiary-fixed": "#95f8a7",
+                        "on-primary-fixed-variant": "#005321",
+                        "on-primary-fixed": "#002109",
+                        "primary": "#006e2f",
+                        "primary-container": "#22c55e",
+                        "on-background": "#191c19",
+                        "background": "#f8faf4",
+                        "on-secondary-fixed": "#001e2c",
+                        "error": "#ba1a1a",
+                        "secondary": "#00668a",
+                        "secondary-container": "#40c2fd",
+                        "secondary-fixed-dim": "#7bd0ff",
+                        "on-tertiary-container": "#004a1f",
+                        "outline": "#6d7b6c",
+                        "surface-container": "#ecefe9",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "on-secondary-container": "#004d6a",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#5ebf74",
+                        "inverse-on-surface": "#eff1ec",
+                        "secondary-fixed": "#c4e7ff",
+                        "inverse-primary": "#4ae176",
+                        "on-surface-variant": "#3d4a3d",
+                        "on-primary-container": "#004b1e",
+                        "surface-container-high": "#e7e9e3",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#4ae176",
+                        "surface-tint": "#006e2f",
+                        "on-tertiary-fixed-variant": "#005323",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#2e312e",
+                        "surface": "#f8faf4",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "max-width": "1440px",
+                        "margin-desktop": "5rem",
+                        "cluster-gap": "2rem",
+                        "zone-padding": "3rem",
+                        "margin-mobile": "1.5rem",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Outfit"],
+                        "body-lg": ["Outfit"],
+                        "display-lg": ["Outfit"],
+                        "label-caps": ["Outfit"],
+                        "headline-md": ["Outfit"],
+                        "display-lg-mobile": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.7", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "1.2", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #F8FAF4; }
+        .energy-gradient { background: linear-gradient(135deg, #006e2f 0%, #22c55e 100%); }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased overflow-x-hidden pt-24">
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/80 shadow-[0px_10px_40px_rgba(31,41,55,0.04)] hidden md:flex">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-max-width mx-auto w-full">
+<div class="font-display-lg text-display-lg text-primary tracking-tighter">DORMPULSE</div>
+<ul class="flex gap-8 items-center">
+<li><a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Overview</a></li>
+<li><a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Hostel Map</a></li>
+<li><a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Flow</a></li>
+<li><a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Impact</a></li>
+<li><a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">AI Advisor</a></li>
+<li><a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Heatmap</a></li>
+<li><a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Savings</a></li>
+<li><a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Automation</a></li>
+<li><a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">SDG 7</a></li>
+</ul>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:text-primary-container transition-colors duration-300">notifications_active</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:text-primary-container transition-colors duration-300">account_circle</span>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-medium hover:bg-primary-container transition-colors duration-300 shadow-md border border-primary hover:border-primary-container">Optimize Now</button>
+</div>
+</div>
+</nav>
+<!-- Mobile Nav (Simplified) -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/80 shadow-[0px_10px_40px_rgba(31,41,55,0.04)] md:hidden flex justify-between items-center px-margin-mobile py-4">
+<div class="font-display-lg-mobile text-display-lg-mobile text-primary tracking-tighter">DORMPULSE</div>
+<span class="material-symbols-outlined text-primary text-3xl">menu</span>
+</nav>
+<main class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-zone-padding flex flex-col gap-zone-padding">
+<!-- Hero Section -->
+<section class="flex flex-col md:flex-row gap-cluster-gap items-center">
+<div class="flex-1 flex flex-col gap-6">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">Sustainable Development Goal 7</span>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">Affordable and Clean Energy for Everyone.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                    DormPulse is committed to advancing SDG 7 by transforming campus living spaces into highly efficient, intelligent ecosystems. We leverage digital twins and AI to optimize energy flow without compromising comfort.
+                </p>
+<div class="flex gap-4 mt-4">
+<button class="energy-gradient text-on-primary px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center gap-2">
+                        View Live Data <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="flex-1 w-full rounded-3xl overflow-hidden shadow-[0px_10px_40px_rgba(31,41,55,0.08)] relative h-[400px]">
+<img alt="Sustainable Campus" class="absolute inset-0 w-full h-full object-cover" data-alt="A modern, eco-friendly university campus building featuring extensive green roofs, solar panels, and large glass windows. The architecture blends minimalist design with lush, vibrant greenery. Shot during golden hour with warm, soft sunlight highlighting the building's sustainable features. The mood is optimistic and forward-looking, perfectly capturing the essence of clean energy and modern organicism in architectural design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA2HFVji21V9UNQOqwADtg5X4iTuxqq7WYkr12_gfa0hjpiVcXOQhBDBnpAN3_fohRAsreaWXmPH7fRp5iMcdzyxbwx8s_EJXWgxIQbIZDZOD8eJOCoUoZOKd1-nSYD8o4Z7owAG4AHKkLBDmzrVAalmH6eQrJ1jZQjumbLQJrJhIplYLVXsDhmfi5Huk7SaFnYScW7k3c61dAdK6S82lD5A3kT_ssdkEkdi2VXFhWpiM7VHGJYzj2KQ"/>
+</div>
+</section>
+<!-- Objectives Bento Grid -->
+<section class="flex flex-col gap-cluster-gap">
+<h2 class="font-headline-md text-headline-md text-on-surface">Project Objectives</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0px_10px_40px_rgba(31,41,55,0.04)] flex flex-col gap-4 border border-surface-variant/30 hover:border-primary/20 transition-colors duration-300">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Energy Efficiency</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Reduce overall hostel energy consumption by 30% through intelligent AI-driven HVAC and lighting management.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0px_10px_40px_rgba(31,41,55,0.04)] flex flex-col gap-4 border border-surface-variant/30 hover:border-primary/20 transition-colors duration-300">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">solar_power</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Renewable Integration</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Seamlessly integrate rooftop solar data to prioritize renewable usage during peak generation hours.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0px_10px_40px_rgba(31,41,55,0.04)] flex flex-col gap-4 border border-surface-variant/30 hover:border-primary/20 transition-colors duration-300">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Behavioral Change</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Empower students with real-time feedback and gamified insights to foster sustainable daily habits.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-zone-padding mt-zone-padding bg-surface-container-low flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-cluster-gap">
+<div class="font-headline-md text-headline-md text-primary">DORMPULSE</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">© 2024 DormPulse Ecosystem. Powered by AI for a greener planet.</p>
+<div class="flex gap-6">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:underline decoration-primary transition-all duration-200" href="#">Energy Protocol</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:underline decoration-primary transition-all duration-200" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:underline decoration-primary transition-all duration-200" href="#">Impact Report</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:underline decoration-primary transition-all duration-200" href="#">Support</a>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DormPulse - AI Energy Advisor</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f2f4ee",
+                    "surface-variant": "#e1e3dd",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#00210a",
+                    "on-surface": "#191c19",
+                    "surface-dim": "#d8dbd5",
+                    "surface-bright": "#f8faf4",
+                    "primary-fixed": "#6bff8f",
+                    "tertiary-fixed-dim": "#79db8d",
+                    "surface-container-highest": "#e1e3dd",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#006d30",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#bccbb9",
+                    "tertiary-fixed": "#95f8a7",
+                    "on-primary-fixed-variant": "#005321",
+                    "on-primary-fixed": "#002109",
+                    "primary": "#006e2f",
+                    "primary-container": "#22c55e",
+                    "on-background": "#191c19",
+                    "background": "#f8faf4",
+                    "on-secondary-fixed": "#001e2c",
+                    "error": "#ba1a1a",
+                    "secondary": "#00668a",
+                    "secondary-container": "#40c2fd",
+                    "secondary-fixed-dim": "#7bd0ff",
+                    "on-tertiary-container": "#004a1f",
+                    "outline": "#6d7b6c",
+                    "surface-container": "#ecefe9",
+                    "on-secondary-fixed-variant": "#004c69",
+                    "on-secondary-container": "#004d6a",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#5ebf74",
+                    "inverse-on-surface": "#eff1ec",
+                    "secondary-fixed": "#c4e7ff",
+                    "inverse-primary": "#4ae176",
+                    "on-surface-variant": "#3d4a3d",
+                    "on-primary-container": "#004b1e",
+                    "surface-container-high": "#e7e9e3",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#4ae176",
+                    "surface-tint": "#006e2f",
+                    "on-tertiary-fixed-variant": "#005323",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#2e312e",
+                    "surface": "#f8faf4",
+                    "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max-width": "1440px",
+                    "margin-desktop": "5rem",
+                    "cluster-gap": "2rem",
+                    "zone-padding": "3rem",
+                    "margin-mobile": "1.5rem",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "body-md": [
+                            "Outfit"
+                    ],
+                    "body-lg": [
+                            "Outfit"
+                    ],
+                    "display-lg": [
+                            "Outfit"
+                    ],
+                    "label-caps": [
+                            "Outfit"
+                    ],
+                    "headline-md": [
+                            "Outfit"
+                    ],
+                    "display-lg-mobile": [
+                            "Outfit"
+                    ]
+            },
+            "fontSize": {
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.7",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "1.0",
+                                    "letterSpacing": "0.1em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "display-lg-mobile": [
+                            "36px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Ambient animations */
+        @keyframes subtle-pulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+        .pulse-ambient {
+            animation: subtle-pulse 4s ease-in-out infinite;
+        }
+        
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+        
+        /* Energy stream gradient */
+        .bg-energy-stream {
+            background: linear-gradient(135deg, rgba(0,110,47,0.1) 0%, rgba(34,197,94,0.1) 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col pt-[88px] selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/80 dark:bg-surface-dim/80 shadow-[0px_10px_40px_rgba(31,41,55,0.04)]">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-max-width mx-auto">
+<!-- Brand -->
+<div class="flex items-center gap-2 cursor-pointer group">
+<span class="material-symbols-outlined text-primary text-[32px] filled group-hover:rotate-12 transition-transform duration-300">energy_savings_leaf</span>
+<span class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary tracking-tighter">DORMPULSE</span>
+</div>
+<!-- Navigation Links (Hidden on Mobile) -->
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Overview</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Hostel Map</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Flow</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Impact</a>
+<!-- Active Item -->
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">AI Advisor</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Heatmap</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Savings</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Automation</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">SDG 7</a>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-300">
+<span class="material-symbols-outlined">notifications_active</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-300">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+<button class="bg-primary hover:bg-tertiary text-on-primary px-6 py-2 rounded-full font-medium transition-all duration-300 shadow-[0px_4px_14px_rgba(0,110,47,0.2)] hover:shadow-[0px_6px_20px_rgba(0,110,47,0.3)] active:scale-95 whitespace-nowrap">
+                    Optimize Now
+                </button>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-grow flex flex-col w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-zone-padding gap-zone-padding">
+<!-- Header Section -->
+<header class="flex flex-col gap-4 max-w-3xl">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined filled text-[28px]">robot_2</span>
+<span class="font-label-caps text-label-caps uppercase tracking-widest">Sustainability Intelligence Unit</span>
+</div>
+<h1 class="font-display-lg text-[40px] md:text-display-lg text-on-surface leading-tight tracking-tight">
+                Architectural Efficiency Reports
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                Real-time analysis of spatial energy flow. The AI constantly monitors zones, identifying anomalies and recommending structural optimizations to align with ecosystem protocols.
+            </p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-cluster-gap auto-rows-[minmax(180px,_auto)]">
+<!-- High Priority Report (Spans 8 columns) -->
+<article class="col-span-1 md:col-span-8 bg-surface-container-lowest rounded-2xl p-8 shadow-[0px_10px_40px_rgba(31,41,55,0.04)] relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300 flex flex-col justify-between">
+<!-- Ambient Accent -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-error-container/30 rounded-full blur-[60px] -mr-20 -mt-20 group-hover:scale-110 transition-transform duration-700"></div>
+<header class="flex justify-between items-start mb-6 relative z-10">
+<div class="flex gap-3 items-center bg-error-container text-on-error-container px-3 py-1.5 rounded-full border border-error/20">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<span class="font-label-caps text-label-caps">High Priority Intervention</span>
+</div>
+<span class="font-body-md text-sm text-outline">Report ID: #AIE-742</span>
+</header>
+<div class="flex flex-col gap-2 mb-8 relative z-10">
+<h2 class="font-headline-md text-headline-md text-on-surface">Spatial Anomaly: Room 203 (North Wing)</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Continuous baseline power draw detected while spatial occupancy sensors confirm vacancy for &gt; 12 hours. Indicates severe leakage in the HVAC or phantom load from unauthorized appliances.</p>
+</div>
+<div class="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between border-t border-surface-variant pt-6 relative z-10">
+<div class="flex items-center gap-6">
+<div>
+<span class="block font-label-caps text-label-caps text-outline mb-1">Estimated Waste</span>
+<span class="font-headline-md text-error font-medium">1.2 kWh / day</span>
+</div>
+<div class="w-px h-10 bg-surface-variant"></div>
+<div>
+<span class="block font-label-caps text-label-caps text-outline mb-1">AI Action</span>
+<span class="font-headline-md text-on-surface font-medium text-[20px]">Isolate Breaker</span>
+</div>
+</div>
+<button class="bg-surface border border-outline-variant hover:border-primary text-primary px-6 py-2.5 rounded-full font-medium transition-all duration-300 flex items-center gap-2 hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+                        Authorize Action
+                    </button>
+</div>
+</article>
+<!-- System Status (Spans 4 columns) -->
+<aside class="col-span-1 md:col-span-4 bg-surface-container-lowest rounded-2xl p-8 shadow-[0px_10px_40px_rgba(31,41,55,0.04)] flex flex-col relative overflow-hidden bg-energy-stream">
+<header class="flex items-center justify-between mb-8 relative z-10">
+<span class="font-label-caps text-label-caps text-tertiary">System Health</span>
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+</header>
+<div class="flex-grow flex flex-col justify-center items-center text-center relative z-10">
+<div class="w-32 h-32 rounded-full border-[6px] border-surface-container flex items-center justify-center mb-4 relative">
+<svg class="absolute inset-0 w-full h-full -rotate-90" viewbox="0 0 100 100">
+<circle class="text-primary" cx="50" cy="50" fill="none" r="46" stroke="currentColor" stroke-dasharray="289" stroke-dashoffset="20" stroke-linecap="round" stroke-width="6"></circle>
+</svg>
+<span class="font-display-lg text-[36px] text-primary">94%</span>
+</div>
+<h3 class="font-headline-md text-[20px] text-on-surface mb-2">Ecosystem Optimal</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Current configurations are maintaining high efficiency across 85% of physical zones.</p>
+</div>
+</aside>
+<!-- Optimization Suggestion 1 (Spans 6 columns) -->
+<article class="col-span-1 md:col-span-6 bg-surface-container-lowest rounded-2xl p-6 md:p-8 shadow-[0px_10px_40px_rgba(31,41,55,0.04)] border border-transparent hover:border-surface-variant transition-all duration-300 flex flex-col">
+<header class="flex justify-between items-start mb-6">
+<div class="flex gap-2 items-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">air</span>
+<span class="font-label-caps text-label-caps">Protocol Revision</span>
+</div>
+<span class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-1 rounded-md font-label-caps text-[10px]">+14% Efficiency</span>
+</header>
+<div class="flex-grow">
+<h3 class="font-headline-md text-[22px] text-on-surface mb-3">Reduce Exhaust Fan Timeout</h3>
+<p class="font-body-md text-on-surface-variant mb-4">Analysis of the 'South Washroom Block' indicates the current 30-minute post-occupancy fan run-time exceeds required ventilation standards based on humidity dissipation curves.</p>
+<div class="bg-surface-container-low p-4 rounded-xl font-body-md text-sm border-l-4 border-secondary flex flex-col gap-2">
+<div class="flex justify-between">
+<span class="text-outline">Current Parameter:</span>
+<span class="text-on-surface line-through">1800 seconds (30m)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">Suggested Parameter:</span>
+<span class="text-primary font-medium">900 seconds (15m)</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex justify-end">
+<button class="text-secondary font-medium hover:text-on-secondary-container transition-colors flex items-center gap-1">
+                        Apply Protocol <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Optimization Suggestion 2 (Spans 6 columns) -->
+<article class="col-span-1 md:col-span-6 bg-surface-container-lowest rounded-2xl p-6 md:p-8 shadow-[0px_10px_40px_rgba(31,41,55,0.04)] border border-transparent hover:border-surface-variant transition-all duration-300 flex flex-col">
+<header class="flex justify-between items-start mb-6">
+<div class="flex gap-2 items-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">lightbulb</span>
+<span class="font-label-caps text-label-caps">Luminance Optimization</span>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-2.5 py-1 rounded-md font-label-caps text-[10px]">+8% Efficiency</span>
+</header>
+<div class="flex-grow">
+<h3 class="font-headline-md text-[22px] text-on-surface mb-3">Lounge Daylighting Integration</h3>
+<p class="font-body-md text-on-surface-variant mb-4">Solar azimuth data merged with lux sensors in the 'Main Lounge' reveals artificial lighting operates at 100% capacity during peak natural illumination hours (10:00 - 14:00).</p>
+<div class="bg-surface-container-low p-4 rounded-xl font-body-md text-sm border-l-4 border-tertiary flex items-center gap-4">
+<span class="material-symbols-outlined text-tertiary text-[24px]">wb_sunny</span>
+<span class="text-on-surface">Enable progressive dimming curve linked to exterior ambient light levels.</span>
+</div>
+</div>
+<div class="mt-6 flex justify-end">
+<button class="text-tertiary font-medium hover:text-on-tertiary-container transition-colors flex items-center gap-1">
+                        Apply Protocol <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</article>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-zone-padding mt-zone-padding bg-surface-container-low dark:bg-surface-container-lowest">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-cluster-gap max-w-max-width mx-auto">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">
+                DORMPULSE
+            </div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-outline-variant hover:underline decoration-primary dark:decoration-primary-fixed transition-all duration-200" href="#">Energy Protocol</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-outline-variant hover:underline decoration-primary dark:decoration-primary-fixed transition-all duration-200" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-outline-variant hover:underline decoration-primary dark:decoration-primary-fixed transition-all duration-200" href="#">Impact Report</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-outline-variant hover:underline decoration-primary dark:decoration-primary-fixed transition-all duration-200" href="#">Support</a>
+</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant dark:text-outline-variant text-center md:text-right">
+                © 2024 DormPulse Ecosystem. Powered by AI for a greener planet.
+            </div>
+</div>
+</footer>
+</body></html>
