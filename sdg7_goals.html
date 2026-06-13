@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html  lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DormPulse - About SDG 7</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        "colors": {
+          "primary": "#006e2f",            // Leaf Green
+          "primary-container": "#22c55e",  // Vibrant Green Accent
+          "on-primary": "#ffffff",
+          "secondary": "#00668a",          // Sky/Water Blue
+          "secondary-container": "#40c2fd",// Vibrant Sky Blue
+          "on-secondary": "#ffffff",
+          "tertiary": "#006d30",           // Forest Green
+          "tertiary-container": "#5ebf74", // Light Green Accent
+          "on-tertiary": "#ffffff",
+          "background": "#f8faf4",         // Extremely soft warm white/greenish-beige background
+          "on-background": "#00210a",      // Legible deep forest text
+          "surface": "#f8faf4",            // Matching background
+          "on-surface": "#00210a",         // Legible deep forest text
+          "surface-container": "#ecefe9",  // Slightly darker warm white/gray
+          "surface-container-low": "#f2f4ee",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-high": "#e7e9e3",
+          "surface-container-highest": "#e1e3dd",
+          "on-surface-variant": "#3d4a3d", // Organic slate gray for labels
+          "outline": "#6d7b6c",
+          "outline-variant": "#bccbb9",
+          "error": "#ba1a1a",
+          "error-container": "#ffdad6",
+          "on-error": "#ffffff",
+          "on-error-container": "#93000a"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.5rem",
+          "lg": "0.75rem",
+          "xl": "1rem",
+          "2xl": "1.5rem",
+          "3xl": "2rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "max-width": "1280px",
+          "margin-desktop": "4rem",
+          "cluster-gap": "1.75rem",
+          "zone-padding": "2.5rem",
+          "margin-mobile": "1.25rem"
+        },
+        "fontFamily": {
+          "sans": ["Outfit", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+        body { background-color: #F8FAF4; }
+        .energy-gradient { background: linear-gradient(135deg, #006e2f 0%, #22c55e 100%); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-sans min-h-screen flex flex-col pt-24 selection:bg-primary-container selection:text-on-primary-container">
+
+<!-- TopNavBar Shared Component -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/90 border-b border-surface-variant/30 shadow-[0px_2px_15px_rgba(0,110,47,0.02)]">
+  <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-max-width mx-auto">
+    <!-- Brand Logo -->
+    <a class="flex items-center gap-2 group cursor-pointer" href="index.html">
+      <span class="material-symbols-outlined text-primary text-2xl filled group-hover:rotate-12 transition-transform duration-300">energy_savings_leaf</span>
+      <span class="font-bold text-lg tracking-tight text-primary">DORMPULSE</span>
+    </a>
+    
+    <!-- Navigation Links -->
+    <ul class="hidden md:flex items-center gap-8">
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="index.html" id="nav-overview">Overview</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="hostel_map.html" id="nav-hostel-map">Hostel Map</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="sustainability_impact.html" id="nav-impact">Impact</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="ai_advisor.html" id="nav-ai-advisor">AI Advisor</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="savings_timeline.html" id="nav-savings">Savings</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="sdg7_goals.html" id="nav-sdg7">SDG 7</a>
+      </li>
+    </ul>
+
+    <!-- Trailing Actions -->
+    <div class="flex items-center gap-4">
+      <div class="hidden md:flex items-center gap-4">
+        <button class="text-on-surface-variant hover:text-primary transition-colors duration-300 flex items-center justify-center p-1.5 rounded-full hover:bg-surface-container-low" aria-label="Notifications">
+          <span class="material-symbols-outlined text-xl">notifications_active</span>
+        </button>
+        <button class="text-on-surface-variant hover:text-primary transition-colors duration-300 flex items-center justify-center p-1.5 rounded-full hover:bg-surface-container-low" aria-label="Profile">
+          <span class="material-symbols-outlined text-xl">account_circle</span>
+        </button>
+      </div>
+      <button class="bg-primary hover:bg-[#005321] text-on-primary px-5 py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 shadow-[0_4px_12px_rgba(0,110,47,0.15)] hover:shadow-[0_6px_18px_rgba(0,110,47,0.25)] active:scale-95 whitespace-nowrap" onclick="openOptimizeModal()">
+        Optimize Now
+      </button>
+      <!-- Mobile Menu Toggle -->
+      <button class="md:hidden text-on-surface-variant flex items-center justify-center p-1.5 rounded-full hover:bg-surface-container-low" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+        <span class="material-symbols-outlined text-2xl">menu</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Mobile Navigation Dropdown -->
+  <div class="hidden md:hidden border-t border-surface-variant/30 bg-surface/95 py-4 px-margin-mobile flex flex-col gap-3 shadow-lg" id="mobile-nav-menu">
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="index.html">Overview</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="hostel_map.html">Hostel Map</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="sustainability_impact.html">Impact</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="ai_advisor.html">AI Advisor</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="savings_timeline.html">Savings</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2" href="sdg7_goals.html">SDG 7</a>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Dynamic active page styling
+    const path = window.location.pathname;
+    const page = path.split('/').pop() || 'index.html';
+    
+    let activeId = 'nav-overview';
+    if (page === 'hostel_map.html') activeId = 'nav-hostel-map';
+    else if (page === 'sustainability_impact.html') activeId = 'nav-impact';
+    else if (page === 'ai_advisor.html') activeId = 'nav-ai-advisor';
+    else if (page === 'savings_timeline.html') activeId = 'nav-savings';
+    else if (page === 'sdg7_goals.html') activeId = 'nav-sdg7';
+    
+    const activeLink = document.getElementById(activeId);
+    if (activeLink) {
+      activeLink.className = "text-primary font-bold border-b-2 border-primary pb-1 text-sm";
+    }
+
+    // Mobile menu toggle logic
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-nav-menu');
+    if (btn && menu) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('hidden');
+      });
+      document.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
+    }
+  });
+</script>
+
+<main class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-zone-padding flex flex-col gap-zone-padding">
+<!-- Hero Section -->
+<section class="flex flex-col md:flex-row gap-cluster-gap items-center">
+<div class="flex-1 flex flex-col gap-6">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">Sustainable Development Goal 7</span>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">Affordable and Clean Energy for Everyone.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                    DormPulse is committed to advancing SDG 7 by transforming campus living spaces into highly efficient, intelligent ecosystems. We leverage digital twins and AI to optimize energy flow without compromising comfort.
+                </p>
+<div class="flex gap-4 mt-4">
+<button class="energy-gradient text-on-primary px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center gap-2">
+                        View Live Data <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="flex-1 w-full rounded-3xl overflow-hidden shadow-[0px_10px_40px_rgba(31,41,55,0.08)] relative h-[400px]">
+<img alt="Sustainable Campus" class="absolute inset-0 w-full h-full object-cover" data-alt="A modern, eco-friendly university campus building featuring extensive green roofs, solar panels, and large glass windows. The architecture blends minimalist design with lush, vibrant greenery. Shot during golden hour with warm, soft sunlight highlighting the building's sustainable features. The mood is optimistic and forward-looking, perfectly capturing the essence of clean energy and modern organicism in architectural design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA2HFVji21V9UNQOqwADtg5X4iTuxqq7WYkr12_gfa0hjpiVcXOQhBDBnpAN3_fohRAsreaWXmPH7fRp5iMcdzyxbwx8s_EJXWgxIQbIZDZOD8eJOCoUoZOKd1-nSYD8o4Z7owAG4AHKkLBDmzrVAalmH6eQrJ1jZQjumbLQJrJhIplYLVXsDhmfi5Huk7SaFnYScW7k3c61dAdK6S82lD5A3kT_ssdkEkdi2VXFhWpiM7VHGJYzj2KQ"/>
+</div>
+</section>
+<!-- Objectives Bento Grid -->
+<section class="flex flex-col gap-cluster-gap">
+<h2 class="font-headline-md text-headline-md text-on-surface">Project Objectives</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0px_10px_40px_rgba(31,41,55,0.04)] flex flex-col gap-4 border border-surface-variant/30 hover:border-primary/20 transition-colors duration-300">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Energy Efficiency</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Reduce overall hostel energy consumption by 30% through intelligent AI-driven HVAC and lighting management.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0px_10px_40px_rgba(31,41,55,0.04)] flex flex-col gap-4 border border-surface-variant/30 hover:border-primary/20 transition-colors duration-300">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">solar_power</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Renewable Integration</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Seamlessly integrate rooftop solar data to prioritize renewable usage during peak generation hours.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0px_10px_40px_rgba(31,41,55,0.04)] flex flex-col gap-4 border border-surface-variant/30 hover:border-primary/20 transition-colors duration-300">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Behavioral Change</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Empower students with real-time feedback and gamified insights to foster sustainable daily habits.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+
+<footer class="w-full py-zone-padding mt-zone-padding bg-surface-container-low/50 border-t border-surface-variant/20">
+  <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop gap-cluster-gap max-w-max-width mx-auto">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-xl filled">energy_savings_leaf</span>
+      <span class="font-bold text-base tracking-tight text-primary">DORMPULSE</span>
+    </div>
+    <div class="flex flex-wrap justify-center gap-6">
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Energy Protocol</a>
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Privacy Policy</a>
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="sustainability_impact.html">Impact Report</a>
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Support</a>
+    </div>
+    <div class="text-xs font-medium tracking-wide text-on-surface-variant text-center md:text-right">
+      © 2026 DormPulse Ecosystem. Powered by AI for a greener planet.
+    </div>
+  </div>
+</footer>
+
+
+<!-- Global Optimize Now Modal -->
+<div id="optimize-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-[#00210a]/40 backdrop-blur-sm" onclick="closeOptimizeModal()"></div>
+  <div class="bg-white rounded-3xl p-8 max-w-md w-full relative z-10 shadow-2xl border border-surface-variant/30 transform transition-transform duration-300 scale-95 opacity-0" id="optimize-modal-card">
+    <h3 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+      <span class="material-symbols-outlined animate-spin">sync</span> Optimizing Ecosystem...
+    </h3>
+    <div class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+      <p id="opt-step-1" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Analyzing HVAC baselines...</p>
+      <p id="opt-step-2" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Checking room occupancy logs...</p>
+      <p id="opt-step-3" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Triggering auto-shutoff for vacant zones...</p>
+      <p id="opt-step-4" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Recalibrating lighting curves...</p>
+    </div>
+    <div class="mt-6 flex justify-end">
+      <button id="opt-close-btn" class="bg-primary text-on-primary px-6 py-2 rounded-full font-medium opacity-50 cursor-not-allowed" disabled onclick="closeOptimizeModal()">
+        Optimizing...
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  function openOptimizeModal() {
+    const modal = document.getElementById('optimize-modal');
+    const card = document.getElementById('optimize-modal-card');
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+      card.classList.remove('scale-95', 'opacity-0');
+      card.classList.add('scale-100', 'opacity-100');
+    }, 10);
+    
+    // Run simulated optimization steps
+    const steps = [
+      { id: 'opt-step-1', text: 'Analyzing HVAC baselines... Done!' },
+      { id: 'opt-step-2', text: 'Checking room occupancy logs... Done!' },
+      { id: 'opt-step-3', text: 'Triggering auto-shutoff for vacant zones... Done!' },
+      { id: 'opt-step-4', text: 'Recalibrating lighting curves... Completed!' }
+    ];
+    
+    steps.forEach((step, idx) => {
+      setTimeout(() => {
+        const el = document.getElementById(step.id);
+        if (el) {
+          el.innerHTML = '<span class="material-symbols-outlined text-primary text-sm font-bold">check_circle</span> ' + step.text;
+          el.classList.remove('opacity-50');
+          el.classList.add('text-on-surface');
+        }
+        
+        if (idx === steps.length - 1) {
+          const btn = document.getElementById('opt-close-btn');
+          if (btn) {
+            btn.disabled = false;
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            btn.innerText = 'All Done';
+          }
+        }
+      }, (idx + 1) * 800);
+    });
+  }
+  
+  function closeOptimizeModal() {
+    const modal = document.getElementById('optimize-modal');
+    const card = document.getElementById('optimize-modal-card');
+    card.classList.remove('scale-100', 'opacity-100');
+    card.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      // Reset steps
+      const steps = ['opt-step-1', 'opt-step-2', 'opt-step-3', 'opt-step-4'];
+      const defaultTexts = [
+        'Analyzing HVAC baselines...',
+        'Checking room occupancy logs...',
+        'Triggering auto-shutoff for vacant zones...',
+        'Recalibrating lighting curves...'
+      ];
+      steps.forEach((id, idx) => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.innerHTML = '<span class="material-symbols-outlined text-sm">circle</span> ' + defaultTexts[idx];
+          el.className = 'flex items-center gap-2 opacity-50';
+        }
+      });
+      const btn = document.getElementById('opt-close-btn');
+      if (btn) {
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+        btn.innerText = 'Optimizing...';
+      }
+    }, 300);
+  }
+</script>
+
+<script type="module" src="/agentation-mount.js"></script>
+</body></html>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+
+<html  lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DormPulse - Interactive Hostel Map</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        "colors": {
+          "primary": "#006e2f",            // Leaf Green
+          "primary-container": "#22c55e",  // Vibrant Green Accent
+          "on-primary": "#ffffff",
+          "secondary": "#00668a",          // Sky/Water Blue
+          "secondary-container": "#40c2fd",// Vibrant Sky Blue
+          "on-secondary": "#ffffff",
+          "tertiary": "#006d30",           // Forest Green
+          "tertiary-container": "#5ebf74", // Light Green Accent
+          "on-tertiary": "#ffffff",
+          "background": "#f8faf4",         // Extremely soft warm white/greenish-beige background
+          "on-background": "#00210a",      // Legible deep forest text
+          "surface": "#f8faf4",            // Matching background
+          "on-surface": "#00210a",         // Legible deep forest text
+          "surface-container": "#ecefe9",  // Slightly darker warm white/gray
+          "surface-container-low": "#f2f4ee",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-high": "#e7e9e3",
+          "surface-container-highest": "#e1e3dd",
+          "on-surface-variant": "#3d4a3d", // Organic slate gray for labels
+          "outline": "#6d7b6c",
+          "outline-variant": "#bccbb9",
+          "error": "#ba1a1a",
+          "error-container": "#ffdad6",
+          "on-error": "#ffffff",
+          "on-error-container": "#93000a"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.5rem",
+          "lg": "0.75rem",
+          "xl": "1rem",
+          "2xl": "1.5rem",
+          "3xl": "2rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "max-width": "1280px",
+          "margin-desktop": "4rem",
+          "cluster-gap": "1.75rem",
+          "zone-padding": "2.5rem",
+          "margin-mobile": "1.25rem"
+        },
+        "fontFamily": {
+          "sans": ["Outfit", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+        body {
+            background-color: #F8FAF4; /* Base Layer: Light Earth */
+            color: #191c19;
+            margin: 0;
+            padding-top: 5rem; /* For fixed nav */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Ambient Shadow for Clusters */
+        .ambient-shadow {
+            box-shadow: 0px 10px 40px rgba(31, 41, 55, 0.04);
+        }
+
+        /* Map specific styles */
+        .room {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .room:hover {
+            transform: scale(1.02);
+            z-index: 10;
+        }
+        
+        .room-efficient { fill: #22c55e; fill-opacity: 0.2; stroke: #22c55e; stroke-width: 2; }
+        .room-moderate { fill: #f59e0b; fill-opacity: 0.2; stroke: #f59e0b; stroke-width: 2; }
+        .room-wasteful { fill: #ef4444; fill-opacity: 0.2; stroke: #ef4444; stroke-width: 2; }
+        .room-automated { fill: #3b82f6; fill-opacity: 0.2; stroke: #3b82f6; stroke-width: 2; }
+        
+        .room-corridor { fill: #e1e3dd; fill-opacity: 0.3; stroke: #bccbb9; stroke-width: 1; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-sans min-h-screen flex flex-col pt-24 selection:bg-primary-container selection:text-on-primary-container">
+
+<!-- TopNavBar Shared Component -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/90 border-b border-surface-variant/30 shadow-[0px_2px_15px_rgba(0,110,47,0.02)]">
+  <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-max-width mx-auto">
+    <!-- Brand Logo -->
+    <a class="flex items-center gap-2 group cursor-pointer" href="index.html">
+      <span class="material-symbols-outlined text-primary text-2xl filled group-hover:rotate-12 transition-transform duration-300">energy_savings_leaf</span>
+      <span class="font-bold text-lg tracking-tight text-primary">DORMPULSE</span>
+    </a>
+    
+    <!-- Navigation Links -->
+    <ul class="hidden md:flex items-center gap-8">
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="index.html" id="nav-overview">Overview</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="hostel_map.html" id="nav-hostel-map">Hostel Map</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="sustainability_impact.html" id="nav-impact">Impact</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="ai_advisor.html" id="nav-ai-advisor">AI Advisor</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="savings_timeline.html" id="nav-savings">Savings</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="sdg7_goals.html" id="nav-sdg7">SDG 7</a>
+      </li>
+    </ul>
+
+    <!-- Trailing Actions -->
+    <div class="flex items-center gap-4">
+      <div class="hidden md:flex items-center gap-4">
+        <button class="text-on-surface-variant hover:text-primary transition-colors duration-300 flex items-center justify-center p-1.5 rounded-full hover:bg-surface-container-low" aria-label="Notifications">
+          <span class="material-symbols-outlined text-xl">notifications_active</span>
+        </button>
+        <button class="text-on-surface-variant hover:text-primary transition-colors duration-300 flex items-center justify-center p-1.5 rounded-full hover:bg-surface-container-low" aria-label="Profile">
+          <span class="material-symbols-outlined text-xl">account_circle</span>
+        </button>
+      </div>
+      <button class="bg-primary hover:bg-[#005321] text-on-primary px-5 py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 shadow-[0_4px_12px_rgba(0,110,47,0.15)] hover:shadow-[0_6px_18px_rgba(0,110,47,0.25)] active:scale-95 whitespace-nowrap" onclick="openOptimizeModal()">
+        Optimize Now
+      </button>
+      <!-- Mobile Menu Toggle -->
+      <button class="md:hidden text-on-surface-variant flex items-center justify-center p-1.5 rounded-full hover:bg-surface-container-low" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+        <span class="material-symbols-outlined text-2xl">menu</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Mobile Navigation Dropdown -->
+  <div class="hidden md:hidden border-t border-surface-variant/30 bg-surface/95 py-4 px-margin-mobile flex flex-col gap-3 shadow-lg" id="mobile-nav-menu">
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="index.html">Overview</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="hostel_map.html">Hostel Map</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="sustainability_impact.html">Impact</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="ai_advisor.html">AI Advisor</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="savings_timeline.html">Savings</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2" href="sdg7_goals.html">SDG 7</a>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Dynamic active page styling
+    const path = window.location.pathname;
+    const page = path.split('/').pop() || 'index.html';
+    
+    let activeId = 'nav-overview';
+    if (page === 'hostel_map.html') activeId = 'nav-hostel-map';
+    else if (page === 'sustainability_impact.html') activeId = 'nav-impact';
+    else if (page === 'ai_advisor.html') activeId = 'nav-ai-advisor';
+    else if (page === 'savings_timeline.html') activeId = 'nav-savings';
+    else if (page === 'sdg7_goals.html') activeId = 'nav-sdg7';
+    
+    const activeLink = document.getElementById(activeId);
+    if (activeLink) {
+      activeLink.className = "text-primary font-bold border-b-2 border-primary pb-1 text-sm";
+    }
+
+    // Mobile menu toggle logic
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-nav-menu');
+    if (btn && menu) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('hidden');
+      });
+      document.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
+    }
+  });
+</script>
+
+<main class="flex-grow max-w-max-width mx-auto w-full px-margin-mobile md:px-margin-desktop py-zone-padding flex flex-col gap-zone-padding">
+<!-- Header Zone -->
+<header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-cluster-gap">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-2">North Wing - 2nd Floor</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+                    Live view of energy consumption and occupancy. Click on any room to inspect automated saving protocols and current appliance status.
+                </p>
+</div>
+<!-- Floor Selector -->
+<div class="bg-surface-container-low rounded-full p-1 flex shadow-sm border border-surface-variant">
+<button class="px-4 py-2 rounded-full text-sm font-medium text-on-surface-variant hover:bg-surface transition-colors">Floor 1</button>
+<button class="px-4 py-2 rounded-full text-sm font-medium bg-surface text-primary shadow-sm border border-outline-variant">Floor 2</button>
+<button class="px-4 py-2 rounded-full text-sm font-medium text-on-surface-variant hover:bg-surface transition-colors">Floor 3</button>
+</div>
+</header>
+<!-- Map & Details Ecosystem Cluster -->
+<div class="flex flex-col lg:flex-row gap-cluster-gap">
+<!-- Left: Interactive Map Canvas -->
+<div class="flex-grow bg-surface rounded-[2rem] p-8 ambient-shadow relative overflow-hidden min-h-[500px] flex items-center justify-center border border-surface-variant">
+<!-- Map Legend -->
+<div class="absolute top-6 left-6 flex flex-col gap-2 bg-surface/90 backdrop-blur p-4 rounded-xl shadow-sm border border-surface-variant z-20">
+<div class="flex items-center gap-2 text-sm text-on-surface"><div class="w-3 h-3 rounded-full bg-primary-container"></div> Efficient</div>
+<div class="flex items-center gap-2 text-sm text-on-surface"><div class="w-3 h-3 rounded-full bg-amber-400"></div> Moderate</div>
+<div class="flex items-center gap-2 text-sm text-on-surface"><div class="w-3 h-3 rounded-full bg-red-400"></div> Wasteful</div>
+<div class="flex items-center gap-2 text-sm text-on-surface"><div class="w-3 h-3 rounded-full bg-blue-400"></div> Automated</div>
+</div>
+<!-- SVG Floorplan -->
+<svg class="w-full h-full max-w-3xl drop-shadow-md" viewbox="0 0 800 500">
+<!-- Base Structure / Corridors -->
+<rect class="room-corridor" height="100" rx="8" width="700" x="50" y="200"></rect>
+<text class="fill-outline text-sm font-label-caps" text-anchor="middle" x="400" y="255">MAIN CORRIDOR</text>
+<!-- Top Row Rooms -->
+<!-- Room 201: Efficient -->
+<g class="room" id="room-201" onclick="selectRoom('201')">
+<rect class="room-efficient" height="150" rx="12" width="130" x="50" y="50"></rect>
+<text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="115" y="125">201</text>
+<circle class="animate-pulse" cx="150" cy="80" fill="#22c55e" r="6"></circle>
+</g>
+<!-- Room 202: Wasteful -->
+<g class="room" id="room-202" onclick="selectRoom('202')">
+<rect class="room-wasteful" height="150" rx="12" width="130" x="190" y="50"></rect>
+<text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="255" y="125">202</text>
+<circle class="animate-pulse" cx="290" cy="80" fill="#ef4444" r="6"></circle>
+</g>
+<!-- Lounge Area: Moderate -->
+<g class="room" id="room-Lounge" onclick="selectRoom('Lounge')">
+<rect class="room-moderate" height="150" rx="12" width="280" x="330" y="50"></rect>
+<text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="470" y="125">COMMON LOUNGE</text>
+<circle class="animate-pulse" cx="580" cy="80" fill="#f59e0b" r="8"></circle>
+</g>
+<!-- Room 203: Automated -->
+<g class="room" id="room-203" onclick="selectRoom('203')">
+<rect class="room-automated" height="150" rx="12" width="130" x="620" y="50"></rect>
+<text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="685" y="125">203</text>
+<circle class="animate-pulse" cx="720" cy="80" fill="#3b82f6" r="6"></circle>
+</g>
+<!-- Bottom Row Rooms -->
+<!-- Room 204: Efficient -->
+<g class="room" id="room-204" onclick="selectRoom('204')">
+<rect class="room-efficient" height="150" rx="12" width="200" x="50" y="300"></rect>
+<text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="150" y="385">204 (DORM)</text>
+</g>
+<!-- Room 205: Efficient -->
+<g class="room" id="room-205" onclick="selectRoom('205')">
+<rect class="room-efficient" height="150" rx="12" width="130" x="260" y="300"></rect>
+<text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="325" y="385">205</text>
+</g>
+<!-- Bathroom: Automated -->
+<g class="room" id="room-Bath" onclick="selectRoom('Bath')">
+<rect class="room-automated" height="150" rx="12" width="130" x="400" y="300"></rect>
+<text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="465" y="385">WASHROOM</text>
+</g>
+<!-- Room 206: Moderate -->
+<g class="room" id="room-206" onclick="selectRoom('206')">
+<rect class="room-moderate" height="150" rx="12" width="210" x="540" y="300"></rect>
+<text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="645" y="385">206 (DORM)</text>
+</g>
+</svg>
+</div>
+<!-- Right: Details Sidebar / Inspector -->
+<aside class="w-full lg:w-96 flex flex-col gap-6">
+<!-- Inspector Card -->
+<div class="bg-surface rounded-[2rem] p-6 ambient-shadow border border-surface-variant flex flex-col gap-6" id="room-inspector" style="transition: transform 0.2s ease;">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-label-caps text-outline mb-1 block">INSPECTING</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Room 202</h2>
+</div>
+<div class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold border border-red-200 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="warning">warning</span>
+                            Wasteful
+                        </div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-4 rounded-xl border border-surface-variant">
+<span class="text-sm text-on-surface-variant block mb-1">Occupancy</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" data-icon="person">person</span>
+<span class="font-bold text-on-surface">0/2</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border border-surface-variant">
+<span class="text-sm text-on-surface-variant block mb-1">Current Draw</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" data-icon="bolt">bolt</span>
+<span class="font-bold text-red-600">1.2 kW</span>
+</div>
+</div>
+</div>
+<div class="border-t border-surface-variant pt-4">
+<h3 class="text-sm font-bold text-on-surface mb-3 uppercase tracking-wider">Active Appliances</h3>
+<ul class="flex flex-col gap-3">
+<li class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<div class="bg-surface p-2 rounded-full shadow-sm text-primary">
+<span class="material-symbols-outlined text-[20px]" data-icon="ac_unit">ac_unit</span>
+</div>
+<span class="text-sm font-medium">AC Unit (Running)</span>
+</div>
+<span class="text-sm text-on-surface-variant">800W</span>
+</li>
+<li class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg border border-red-200">
+<div class="flex items-center gap-3">
+<div class="bg-surface p-2 rounded-full shadow-sm text-amber-500">
+<span class="material-symbols-outlined text-[20px]" data-icon="lightbulb">lightbulb</span>
+</div>
+<span class="text-sm font-medium text-red-700">Lights (Empty Room)</span>
+</div>
+<span class="text-sm text-on-surface-variant">120W</span>
+</li>
+</ul>
+</div>
+<button class="w-full bg-surface-container-highest hover:bg-outline-variant text-on-surface font-medium py-3 rounded-xl transition-colors border border-outline-variant flex justify-center items-center gap-2 mt-2">
+<span class="material-symbols-outlined" data-icon="power_settings_new">power_settings_new</span>
+                        Trigger Auto-Shutoff
+                    </button>
+</div>
+<!-- Mini Stats Card -->
+<div class="bg-surface rounded-[2rem] p-6 ambient-shadow border border-surface-variant">
+<h3 class="font-label-caps text-label-caps text-outline mb-4">FLOOR SUMMARY</h3>
+<div class="flex items-end gap-4 mb-2">
+<span class="font-display-lg text-display-lg text-on-surface">84%</span>
+<span class="text-primary font-medium pb-2 flex items-center"><span class="material-symbols-outlined text-[18px]" data-icon="arrow_downward">arrow_downward</span> 2% vs avg</span>
+</div>
+<p class="text-sm text-on-surface-variant">Overall efficiency score for North Wing - 2nd Floor.</p>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+
+<footer class="w-full py-zone-padding mt-zone-padding bg-surface-container-low/50 border-t border-surface-variant/20">
+  <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop gap-cluster-gap max-w-max-width mx-auto">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-xl filled">energy_savings_leaf</span>
+      <span class="font-bold text-base tracking-tight text-primary">DORMPULSE</span>
+    </div>
+    <div class="flex flex-wrap justify-center gap-6">
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Energy Protocol</a>
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Privacy Policy</a>
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="sustainability_impact.html">Impact Report</a>
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Support</a>
+    </div>
+    <div class="text-xs font-medium tracking-wide text-on-surface-variant text-center md:text-right">
+      © 2026 DormPulse Ecosystem. Powered by AI for a greener planet.
+    </div>
+  </div>
+</footer>
+
+<script>
+        // Simple interaction script to demonstrate interactivity without full framework
+        function selectRoom(roomId) {
+            console.log("Selected room:", roomId);
+            // In a real app, this would fetch data and update the inspector panel
+            // For this UI demo, we'll just add a slight animation effect to the inspector to show connection
+            const inspector = document.getElementById('room-inspector');
+            inspector.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                inspector.style.transform = 'scale(1)';
+            }, 150);
+        }
+    </script>
+
+<!-- Global Optimize Now Modal -->
+<div id="optimize-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-[#00210a]/40 backdrop-blur-sm" onclick="closeOptimizeModal()"></div>
+  <div class="bg-white rounded-3xl p-8 max-w-md w-full relative z-10 shadow-2xl border border-surface-variant/30 transform transition-transform duration-300 scale-95 opacity-0" id="optimize-modal-card">
+    <h3 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+      <span class="material-symbols-outlined animate-spin">sync</span> Optimizing Ecosystem...
+    </h3>
+    <div class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+      <p id="opt-step-1" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Analyzing HVAC baselines...</p>
+      <p id="opt-step-2" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Checking room occupancy logs...</p>
+      <p id="opt-step-3" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Triggering auto-shutoff for vacant zones...</p>
+      <p id="opt-step-4" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Recalibrating lighting curves...</p>
+    </div>
+    <div class="mt-6 flex justify-end">
+      <button id="opt-close-btn" class="bg-primary text-on-primary px-6 py-2 rounded-full font-medium opacity-50 cursor-not-allowed" disabled onclick="closeOptimizeModal()">
+        Optimizing...
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  function openOptimizeModal() {
+    const modal = document.getElementById('optimize-modal');
+    const card = document.getElementById('optimize-modal-card');
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+      card.classList.remove('scale-95', 'opacity-0');
+      card.classList.add('scale-100', 'opacity-100');
+    }, 10);
+    
+    // Run simulated optimization steps
+    const steps = [
+      { id: 'opt-step-1', text: 'Analyzing HVAC baselines... Done!' },
+      { id: 'opt-step-2', text: 'Checking room occupancy logs... Done!' },
+      { id: 'opt-step-3', text: 'Triggering auto-shutoff for vacant zones... Done!' },
+      { id: 'opt-step-4', text: 'Recalibrating lighting curves... Completed!' }
+    ];
+    
+    steps.forEach((step, idx) => {
+      setTimeout(() => {
+        const el = document.getElementById(step.id);
+        if (el) {
+          el.innerHTML = '<span class="material-symbols-outlined text-primary text-sm font-bold">check_circle</span> ' + step.text;
+          el.classList.remove('opacity-50');
+          el.classList.add('text-on-surface');
+        }
+        
+        if (idx === steps.length - 1) {
+          const btn = document.getElementById('opt-close-btn');
+          if (btn) {
+            btn.disabled = false;
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            btn.innerText = 'All Done';
+          }
+        }
+      }, (idx + 1) * 800);
+    });
+  }
+  
+  function closeOptimizeModal() {
+    const modal = document.getElementById('optimize-modal');
+    const card = document.getElementById('optimize-modal-card');
+    card.classList.remove('scale-100', 'opacity-100');
+    card.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      // Reset steps
+      const steps = ['opt-step-1', 'opt-step-2', 'opt-step-3', 'opt-step-4'];
+      const defaultTexts = [
+        'Analyzing HVAC baselines...',
+        'Checking room occupancy logs...',
+        'Triggering auto-shutoff for vacant zones...',
+        'Recalibrating lighting curves...'
+      ];
+      steps.forEach((id, idx) => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.innerHTML = '<span class="material-symbols-outlined text-sm">circle</span> ' + defaultTexts[idx];
+          el.className = 'flex items-center gap-2 opacity-50';
+        }
+      });
+      const btn = document.getElementById('opt-close-btn');
+      if (btn) {
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+        btn.innerText = 'Optimizing...';
+      }
+    }, 300);
+  }
+</script>
+
+<script type="module" src="/agentation-mount.js"></script>
+
+      <script>
+        const roomData = {
+          "201": {
+            name: "Room 201",
+            status: "Efficient",
+            statusClass: "bg-green-100 text-green-700 border-green-200",
+            statusIcon: "eco",
+            occupancy: "2/2",
+            draw: "0.2 kW",
+            drawClass: "text-green-600",
+            appliances: [
+              { name: "Lights (LED)", draw: "40W", icon: "lightbulb", iconClass: "text-primary" },
+              { name: "Ceiling Fan", draw: "60W", icon: "mode_fan", iconClass: "text-primary" },
+              { name: "Laptop Charger", draw: "45W", icon: "power", iconClass: "text-primary" }
+            ]
+          },
+          "202": {
+            name: "Room 202",
+            status: "Wasteful",
+            statusClass: "bg-red-100 text-red-700 border-red-200",
+            statusIcon: "warning",
+            occupancy: "0/2",
+            draw: "1.2 kW",
+            drawClass: "text-red-600",
+            appliances: [
+              { name: "AC Unit (Running)", draw: "800W", icon: "ac_unit", iconClass: "text-primary" },
+              { name: "Lights (Empty Room)", draw: "120W", icon: "lightbulb", iconClass: "text-amber-500" },
+              { name: "Monitor (Standby)", draw: "15W", icon: "desktop_windows", iconClass: "text-primary" }
+            ]
+          },
+          "203": {
+            name: "Room 203",
+            status: "Automated",
+            statusClass: "bg-blue-100 text-blue-700 border-blue-200",
+            statusIcon: "smart_toy",
+            occupancy: "1/2",
+            draw: "0.3 kW",
+            drawClass: "text-blue-600",
+            appliances: [
+              { name: "LED Study Lamp", draw: "15W", icon: "lightbulb", iconClass: "text-primary" },
+              { name: "Smart Plug (Air Purifier)", draw: "80W", icon: "power", iconClass: "text-secondary" },
+              { name: "Ceiling Fan (Low)", draw: "30W", icon: "mode_fan", iconClass: "text-primary" }
+            ]
+          },
+          "204": {
+            name: "Room 204 (Dorm)",
+            status: "Efficient",
+            statusClass: "bg-green-100 text-green-700 border-green-200",
+            statusIcon: "eco",
+            occupancy: "4/4",
+            draw: "0.4 kW",
+            drawClass: "text-green-600",
+            appliances: [
+              { name: "LED Ceiling Lights", draw: "80W", icon: "lightbulb", iconClass: "text-primary" },
+              { name: "Ceiling Fans (2x)", draw: "120W", icon: "mode_fan", iconClass: "text-primary" },
+              { name: "Mini Fridge (Eco Mode)", draw: "90W", icon: "kitchen", iconClass: "text-primary" }
+            ]
+          },
+          "205": {
+            name: "Room 205",
+            status: "Efficient",
+            statusClass: "bg-green-100 text-green-700 border-green-200",
+            statusIcon: "eco",
+            occupancy: "1/2",
+            draw: "0.15 kW",
+            drawClass: "text-green-600",
+            appliances: [
+              { name: "Desk Lamp", draw: "12W", icon: "lightbulb", iconClass: "text-primary" },
+              { name: "Laptop Charger", draw: "65W", icon: "power", iconClass: "text-primary" }
+            ]
+          },
+          "206": {
+            name: "Room 206 (Dorm)",
+            status: "Moderate",
+            statusClass: "bg-amber-100 text-amber-700 border-amber-200",
+            statusIcon: "info",
+            occupancy: "3/4",
+            draw: "0.85 kW",
+            drawClass: "text-amber-600",
+            appliances: [
+              { name: "Ceiling Fans (2x)", draw: "120W", icon: "mode_fan", iconClass: "text-primary" },
+              { name: "Mini Fridge (Active)", draw: "150W", icon: "kitchen", iconClass: "text-primary" },
+              { name: "Water Dispenser", draw: "350W", icon: "water_drop", iconClass: "text-secondary" },
+              { name: "Ambient Lights", draw: "60W", icon: "lightbulb", iconClass: "text-primary" }
+            ]
+          },
+          "Lounge": {
+            name: "Common Lounge",
+            status: "Moderate",
+            statusClass: "bg-amber-100 text-amber-700 border-amber-200",
+            statusIcon: "info",
+            occupancy: "8/15",
+            draw: "2.4 kW",
+            drawClass: "text-amber-600",
+            appliances: [
+              { name: "Large AC Unit", draw: "1600W", icon: "ac_unit", iconClass: "text-primary" },
+              { name: "Ceiling Fans (4x)", draw: "240W", icon: "mode_fan", iconClass: "text-primary" },
+              { name: "Smart TV Display", draw: "180W", icon: "tv", iconClass: "text-secondary" },
+              { name: "Overhead Lighting", draw: "300W", icon: "lightbulb", iconClass: "text-primary" }
+            ]
+          },
+          "Bath": {
+            name: "Washroom Block",
+            status: "Automated",
+            statusClass: "bg-blue-100 text-blue-700 border-blue-200",
+            statusIcon: "smart_toy",
+            occupancy: "0/5",
+            draw: "0.05 kW",
+            drawClass: "text-blue-600",
+            appliances: [
+              { name: "Sensors & Controller", draw: "15W", icon: "settings_input_component", iconClass: "text-secondary" },
+              { name: "Exhaust Fans (Standby)", draw: "30W", icon: "mode_fan", iconClass: "text-primary" }
+            ]
+          }
+        };
+
+        function selectRoom(roomId) {
+          console.log("Inspecting room:", roomId);
+          const data = roomData[roomId];
+          if (!data) return;
+
+          // Update titles & status
+          document.querySelector('#room-inspector h2').innerText = data.name;
+          const statusChip = document.querySelector('#room-inspector .flex.justify-between.items-start > div:last-child');
+          if (statusChip) {
+            statusChip.className = `px-3 py-1 rounded-full text-xs font-bold border flex items-center gap-1 ${data.statusClass}`;
+            statusChip.innerHTML = `<span class="material-symbols-outlined text-[16px]">${data.statusIcon}</span>${data.status}`;
+          }
+
+          // Update grids
+          const grids = document.querySelectorAll('#room-inspector .grid.grid-cols-2 > div');
+          if (grids.length >= 2) {
+            // Occupancy
+            grids[0].querySelector('.font-bold').innerText = data.occupancy;
+            // Draw
+            const drawEl = grids[1].querySelector('.font-bold');
+            drawEl.innerText = data.draw;
+            drawEl.className = `font-bold ${data.drawClass}`;
+          }
+
+          // Update appliances
+          const list = document.querySelector('#room-inspector ul');
+          if (list) {
+            list.innerHTML = data.appliances.map(app => `
+              <li class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+                <div class="flex items-center gap-3">
+                  <div class="bg-surface p-2 rounded-full shadow-sm ${app.iconClass}">
+                    <span class="material-symbols-outlined text-[20px]">${app.icon}</span>
+                  </div>
+                  <span class="text-sm font-medium">${app.name}</span>
+                </div>
+                <span class="text-sm text-on-surface-variant">${app.draw}</span>
+              </li>
+            `).join('');
+          }
+
+          // Trigger Auto-Shutoff button update
+          const actionBtn = document.querySelector('#room-inspector button');
+          if (actionBtn) {
+            if (data.status === 'Efficient' || data.status === 'Automated') {
+              actionBtn.disabled = true;
+              actionBtn.className = "w-full bg-surface-container-low text-outline/50 font-medium py-3 rounded-xl border border-surface-variant flex justify-center items-center gap-2 mt-2 cursor-not-allowed";
+              actionBtn.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Already Optimized`;
+            } else {
+              actionBtn.disabled = false;
+              actionBtn.className = "w-full bg-surface-container-highest hover:bg-outline-variant text-on-surface font-medium py-3 rounded-xl transition-colors border border-outline-variant flex justify-center items-center gap-2 mt-2";
+              actionBtn.innerHTML = `<span class="material-symbols-outlined">power_settings_new</span> Trigger Auto-Shutoff`;
+              actionBtn.setAttribute('onclick', `triggerAutoShutoff('${roomId}')`);
+            }
+          }
+
+          // Scale animation
+          const inspector = document.getElementById('room-inspector');
+          if (inspector) {
+            inspector.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                inspector.style.transform = 'scale(1)';
+            }, 150);
+          }
+        }
+
+        function triggerAutoShutoff(roomId) {
+          const btn = document.querySelector('#room-inspector button');
+          if (!btn) return;
+          btn.disabled = true;
+          btn.innerHTML = `<svg class="animate-spin h-5 w-5 mr-2 text-on-surface" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Shutting off...`;
+          
+          setTimeout(() => {
+            // Update data status to Efficient
+            const data = roomData[roomId];
+            data.status = 'Automated';
+            data.statusClass = 'bg-blue-100 text-blue-700 border-blue-200';
+            data.statusIcon = 'smart_toy';
+            data.draw = '0.1 kW';
+            data.drawClass = 'text-blue-600';
+            // Turn off AC / Lights in appliances list
+            data.appliances = data.appliances.map(app => {
+              if (app.name.includes('AC') || app.name.includes('Lights')) {
+                return { ...app, name: app.name.replace('Running', 'Shutoff').replace('Empty Room', 'Off'), draw: '0W', iconClass: 'text-outline/50' };
+              }
+              return app;
+            });
+            
+            // Re-render
+            selectRoom(roomId);
+            
+            // Show toast message
+            alert(`Auto-shutoff successfully triggered for ${data.name}. HVAC and non-essential loads deactivated.`);
+          }, 1500);
+        }
+      </script>
+    
+</body></html>

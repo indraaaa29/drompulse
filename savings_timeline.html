@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html  lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Savings Timeline - DormPulse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        "colors": {
+          "primary": "#006e2f",            // Leaf Green
+          "primary-container": "#22c55e",  // Vibrant Green Accent
+          "on-primary": "#ffffff",
+          "secondary": "#00668a",          // Sky/Water Blue
+          "secondary-container": "#40c2fd",// Vibrant Sky Blue
+          "on-secondary": "#ffffff",
+          "tertiary": "#006d30",           // Forest Green
+          "tertiary-container": "#5ebf74", // Light Green Accent
+          "on-tertiary": "#ffffff",
+          "background": "#f8faf4",         // Extremely soft warm white/greenish-beige background
+          "on-background": "#00210a",      // Legible deep forest text
+          "surface": "#f8faf4",            // Matching background
+          "on-surface": "#00210a",         // Legible deep forest text
+          "surface-container": "#ecefe9",  // Slightly darker warm white/gray
+          "surface-container-low": "#f2f4ee",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-high": "#e7e9e3",
+          "surface-container-highest": "#e1e3dd",
+          "on-surface-variant": "#3d4a3d", // Organic slate gray for labels
+          "outline": "#6d7b6c",
+          "outline-variant": "#bccbb9",
+          "error": "#ba1a1a",
+          "error-container": "#ffdad6",
+          "on-error": "#ffffff",
+          "on-error-container": "#93000a"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.5rem",
+          "lg": "0.75rem",
+          "xl": "1rem",
+          "2xl": "1.5rem",
+          "3xl": "2rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "max-width": "1280px",
+          "margin-desktop": "4rem",
+          "cluster-gap": "1.75rem",
+          "zone-padding": "2.5rem",
+          "margin-mobile": "1.25rem"
+        },
+        "fontFamily": {
+          "sans": ["Outfit", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+        body { background-color: #f8faf4; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .organic-shadow {
+            box-shadow: 0px 10px 40px rgba(31, 41, 55, 0.04);
+        }
+        .tendril { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: grow 3s ease-out forwards; }
+        @keyframes grow { to { stroke-dashoffset: 0; } }
+        .pulse-dot { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        .float-anim { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-sans min-h-screen flex flex-col pt-24 selection:bg-primary-container selection:text-on-primary-container">
+
+<!-- TopNavBar Shared Component -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/90 border-b border-surface-variant/30 shadow-[0px_2px_15px_rgba(0,110,47,0.02)]">
+  <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-max-width mx-auto">
+    <!-- Brand Logo -->
+    <a class="flex items-center gap-2 group cursor-pointer" href="index.html">
+      <span class="material-symbols-outlined text-primary text-2xl filled group-hover:rotate-12 transition-transform duration-300">energy_savings_leaf</span>
+      <span class="font-bold text-lg tracking-tight text-primary">DORMPULSE</span>
+    </a>
+    
+    <!-- Navigation Links -->
+    <ul class="hidden md:flex items-center gap-8">
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="index.html" id="nav-overview">Overview</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="hostel_map.html" id="nav-hostel-map">Hostel Map</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="sustainability_impact.html" id="nav-impact">Impact</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="ai_advisor.html" id="nav-ai-advisor">AI Advisor</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="savings_timeline.html" id="nav-savings">Savings</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="sdg7_goals.html" id="nav-sdg7">SDG 7</a>
+      </li>
+    </ul>
+
+    <!-- Trailing Actions -->
+    <div class="flex items-center gap-4">
+      <div class="hidden md:flex items-center gap-4">
+        <button class="text-on-surface-variant hover:text-primary transition-colors duration-300 flex items-center justify-center p-1.5 rounded-full hover:bg-surface-container-low" aria-label="Notifications">
+          <span class="material-symbols-outlined text-xl">notifications_active</span>
+        </button>
+        <button class="text-on-surface-variant hover:text-primary transition-colors duration-300 flex items-center justify-center p-1.5 rounded-full hover:bg-surface-container-low" aria-label="Profile">
+          <span class="material-symbols-outlined text-xl">account_circle</span>
+        </button>
+      </div>
+      <button class="bg-primary hover:bg-[#005321] text-on-primary px-5 py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 shadow-[0_4px_12px_rgba(0,110,47,0.15)] hover:shadow-[0_6px_18px_rgba(0,110,47,0.25)] active:scale-95 whitespace-nowrap" onclick="openOptimizeModal()">
+        Optimize Now
+      </button>
+      <!-- Mobile Menu Toggle -->
+      <button class="md:hidden text-on-surface-variant flex items-center justify-center p-1.5 rounded-full hover:bg-surface-container-low" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+        <span class="material-symbols-outlined text-2xl">menu</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Mobile Navigation Dropdown -->
+  <div class="hidden md:hidden border-t border-surface-variant/30 bg-surface/95 py-4 px-margin-mobile flex flex-col gap-3 shadow-lg" id="mobile-nav-menu">
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="index.html">Overview</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="hostel_map.html">Hostel Map</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="sustainability_impact.html">Impact</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="ai_advisor.html">AI Advisor</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="savings_timeline.html">Savings</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2" href="sdg7_goals.html">SDG 7</a>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Dynamic active page styling
+    const path = window.location.pathname;
+    const page = path.split('/').pop() || 'index.html';
+    
+    let activeId = 'nav-overview';
+    if (page === 'hostel_map.html') activeId = 'nav-hostel-map';
+    else if (page === 'sustainability_impact.html') activeId = 'nav-impact';
+    else if (page === 'ai_advisor.html') activeId = 'nav-ai-advisor';
+    else if (page === 'savings_timeline.html') activeId = 'nav-savings';
+    else if (page === 'sdg7_goals.html') activeId = 'nav-sdg7';
+    
+    const activeLink = document.getElementById(activeId);
+    if (activeLink) {
+      activeLink.className = "text-primary font-bold border-b-2 border-primary pb-1 text-sm";
+    }
+
+    // Mobile menu toggle logic
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-nav-menu');
+    if (btn && menu) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('hidden');
+      });
+      document.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
+    }
+  });
+</script>
+
+<main class="flex-grow w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-zone-padding">
+<!-- Header Section -->
+<div class="mb-cluster-gap">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-2">Energy Ecosystem</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                Watch your energy savings cultivate a digital garden. The denser the foliage, the greater your hostel's efficiency and environmental impact.
+            </p>
+</div>
+<!-- Ecosystem View (The Garden) -->
+<div class="glass-panel rounded-[2rem] p-8 organic-shadow mb-zone-padding relative overflow-hidden min-h-[500px] flex items-center justify-center">
+<!-- Abstract Garden Visualization -->
+<div class="absolute inset-0 z-0 opacity-20" style="background-image: radial-gradient(circle at 50% 50%, #4ae176 0%, transparent 70%);"></div>
+<svg class="absolute inset-0 w-full h-full z-10 pointer-events-none" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 500">
+<!-- Tendril 1 (Base growth) -->
+<path class="tendril" d="M 100,500 C 150,400 200,300 300,250 C 400,200 500,250 600,150" fill="none" stroke="#22c55e" stroke-linecap="round" stroke-width="4"></path>
+<!-- Tendril 2 (Branching out) -->
+<path class="tendril" d="M 300,250 C 350,150 400,100 500,80" fill="none" stroke="#5ebf74" stroke-linecap="round" stroke-width="3" style="animation-delay: 0.5s;"></path>
+<!-- Tendril 3 (New growth) -->
+<path class="tendril" d="M 600,150 C 700,100 800,150 900,50" fill="none" stroke="#4ae176" stroke-linecap="round" stroke-width="2" style="animation-delay: 1s;"></path>
+</svg>
+<!-- Data Nodes Floating in the Garden -->
+<div class="z-20 w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-cluster-gap">
+<!-- Node 1: Daily -->
+<div class="bg-surface rounded-3xl p-6 organic-shadow float-anim relative">
+<div class="absolute -top-3 -right-3 w-6 h-6 bg-primary-container rounded-full flex items-center justify-center">
+<div class="absolute inset-0 bg-primary-container rounded-full pulse-dot"></div>
+<span class="material-symbols-outlined text-[12px] text-on-primary">eco</span>
+</div>
+<h3 class="font-label-caps text-label-caps text-outline mb-4">TODAY'S SEEDLINGS</h3>
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-1">12<span class="text-headline-md font-headline-md text-surface-tint">kWh</span></div>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-sm">trending_down</span>
+                        15% less than yesterday
+                    </p>
+</div>
+<!-- Node 2: Weekly -->
+<div class="bg-surface rounded-3xl p-6 organic-shadow float-anim relative" style="animation-delay: 1s;">
+<h3 class="font-label-caps text-label-caps text-outline mb-4">WEEKLY CANOPY</h3>
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-tertiary mb-1">84<span class="text-headline-md font-headline-md text-surface-tint">kWh</span></div>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-sm">trending_down</span>
+                        Saved 4 trees this week
+                    </p>
+</div>
+<!-- Node 3: Monthly -->
+<div class="bg-surface rounded-3xl p-6 organic-shadow float-anim relative" style="animation-delay: 2s;">
+<div class="absolute top-4 right-4 bg-tertiary-container/20 text-tertiary px-3 py-1 rounded-full font-label-caps text-[10px]">PEAK</div>
+<h3 class="font-label-caps text-label-caps text-outline mb-4">MONTHLY FOREST</h3>
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-1">340<span class="text-headline-md font-headline-md text-surface-tint">kWh</span></div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Equivalent to powering a small village for a day.
+                    </p>
+</div>
+</div>
+</div>
+<!-- Controls & Metrics Cluster -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-cluster-gap">
+<!-- Timeline Selector -->
+<div class="col-span-1 lg:col-span-4 bg-surface-container-lowest rounded-3xl p-8 organic-shadow flex flex-col justify-center">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Growth Timeline</h2>
+<div class="flex flex-col gap-4">
+<button class="flex items-center justify-between p-4 rounded-xl border border-primary/20 bg-primary/5 text-primary transition-all group">
+<span class="font-body-lg text-body-lg font-medium">Daily View</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="flex items-center justify-between p-4 rounded-xl border border-transparent hover:bg-surface-variant/50 text-on-surface-variant transition-all group">
+<span class="font-body-lg text-body-lg">Weekly View</span>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">arrow_forward</span>
+</button>
+<button class="flex items-center justify-between p-4 rounded-xl border border-transparent hover:bg-surface-variant/50 text-on-surface-variant transition-all group">
+<span class="font-body-lg text-body-lg">Monthly View</span>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Insight Bento Box -->
+<div class="col-span-1 lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest rounded-3xl p-8 organic-shadow flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary">psychiatry</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Lounge Oasis</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">The South Wing Lounge automation has matured beautifully, saving 22% more energy this week compared to last.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-3xl p-8 organic-shadow flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-secondary">water_drop</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Water Circulation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Smart pump scheduling has created a steady, efficient flow, mimicking natural aquifer behavior.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+
+<footer class="w-full py-zone-padding mt-zone-padding bg-surface-container-low/50 border-t border-surface-variant/20">
+  <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop gap-cluster-gap max-w-max-width mx-auto">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-xl filled">energy_savings_leaf</span>
+      <span class="font-bold text-base tracking-tight text-primary">DORMPULSE</span>
+    </div>
+    <div class="flex flex-wrap justify-center gap-6">
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Energy Protocol</a>
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Privacy Policy</a>
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="sustainability_impact.html">Impact Report</a>
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Support</a>
+    </div>
+    <div class="text-xs font-medium tracking-wide text-on-surface-variant text-center md:text-right">
+      © 2026 DormPulse Ecosystem. Powered by AI for a greener planet.
+    </div>
+  </div>
+</footer>
+
+
+<!-- Global Optimize Now Modal -->
+<div id="optimize-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-[#00210a]/40 backdrop-blur-sm" onclick="closeOptimizeModal()"></div>
+  <div class="bg-white rounded-3xl p-8 max-w-md w-full relative z-10 shadow-2xl border border-surface-variant/30 transform transition-transform duration-300 scale-95 opacity-0" id="optimize-modal-card">
+    <h3 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+      <span class="material-symbols-outlined animate-spin">sync</span> Optimizing Ecosystem...
+    </h3>
+    <div class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+      <p id="opt-step-1" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Analyzing HVAC baselines...</p>
+      <p id="opt-step-2" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Checking room occupancy logs...</p>
+      <p id="opt-step-3" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Triggering auto-shutoff for vacant zones...</p>
+      <p id="opt-step-4" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Recalibrating lighting curves...</p>
+    </div>
+    <div class="mt-6 flex justify-end">
+      <button id="opt-close-btn" class="bg-primary text-on-primary px-6 py-2 rounded-full font-medium opacity-50 cursor-not-allowed" disabled onclick="closeOptimizeModal()">
+        Optimizing...
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  function openOptimizeModal() {
+    const modal = document.getElementById('optimize-modal');
+    const card = document.getElementById('optimize-modal-card');
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+      card.classList.remove('scale-95', 'opacity-0');
+      card.classList.add('scale-100', 'opacity-100');
+    }, 10);
+    
+    // Run simulated optimization steps
+    const steps = [
+      { id: 'opt-step-1', text: 'Analyzing HVAC baselines... Done!' },
+      { id: 'opt-step-2', text: 'Checking room occupancy logs... Done!' },
+      { id: 'opt-step-3', text: 'Triggering auto-shutoff for vacant zones... Done!' },
+      { id: 'opt-step-4', text: 'Recalibrating lighting curves... Completed!' }
+    ];
+    
+    steps.forEach((step, idx) => {
+      setTimeout(() => {
+        const el = document.getElementById(step.id);
+        if (el) {
+          el.innerHTML = '<span class="material-symbols-outlined text-primary text-sm font-bold">check_circle</span> ' + step.text;
+          el.classList.remove('opacity-50');
+          el.classList.add('text-on-surface');
+        }
+        
+        if (idx === steps.length - 1) {
+          const btn = document.getElementById('opt-close-btn');
+          if (btn) {
+            btn.disabled = false;
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            btn.innerText = 'All Done';
+          }
+        }
+      }, (idx + 1) * 800);
+    });
+  }
+  
+  function closeOptimizeModal() {
+    const modal = document.getElementById('optimize-modal');
+    const card = document.getElementById('optimize-modal-card');
+    card.classList.remove('scale-100', 'opacity-100');
+    card.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      // Reset steps
+      const steps = ['opt-step-1', 'opt-step-2', 'opt-step-3', 'opt-step-4'];
+      const defaultTexts = [
+        'Analyzing HVAC baselines...',
+        'Checking room occupancy logs...',
+        'Triggering auto-shutoff for vacant zones...',
+        'Recalibrating lighting curves...'
+      ];
+      steps.forEach((id, idx) => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.innerHTML = '<span class="material-symbols-outlined text-sm">circle</span> ' + defaultTexts[idx];
+          el.className = 'flex items-center gap-2 opacity-50';
+        }
+      });
+      const btn = document.getElementById('opt-close-btn');
+      if (btn) {
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+        btn.innerText = 'Optimizing...';
+      }
+    }, 300);
+  }
+</script>
+
+<script type="module" src="/agentation-mount.js"></script>
+
+      <script>
+        const timelineData = {
+          daily: {
+            seedlings: "12<span class=\"text-headline-md font-headline-md text-surface-tint\">kWh</span>",
+            seedlingsLabel: "15% less than yesterday",
+            canopy: "4.2<span class=\"text-headline-md font-headline-md text-surface-tint\">kWh</span>",
+            canopyLabel: "Saved 0.05 trees today",
+            forest: "2.8<span class=\"text-headline-md font-headline-md text-surface-tint\">kg</span>",
+            forestLabel: "CO2 emissions avoided today"
+          },
+          weekly: {
+            seedlings: "84<span class=\"text-headline-md font-headline-md text-surface-tint\">kWh</span>",
+            seedlingsLabel: "Saved 4 trees this week",
+            canopy: "22<span class=\"text-headline-md font-headline-md text-surface-tint\">kWh</span>",
+            canopyLabel: "Lounge automation active",
+            forest: "15.4<span class=\"text-headline-md font-headline-md text-surface-tint\">kg</span>",
+            forestLabel: "Equivalent to 1 week commute"
+          },
+          monthly: {
+            seedlings: "340<span class=\"text-headline-md font-headline-md text-surface-tint\">kWh</span>",
+            seedlingsLabel: "Powering a village for a day",
+            canopy: "94<span class=\"text-headline-md font-headline-md text-surface-tint\">kWh</span>",
+            canopyLabel: "HVAC setpoint auto-shifted",
+            forest: "68.2<span class=\"text-headline-md font-headline-md text-surface-tint\">kg</span>",
+            forestLabel: "Offset target reached by 98%"
+          }
+        };
+
+        function switchTimeline(view, btn) {
+          // Update buttons state
+          const buttons = btn.parentElement.querySelectorAll('button');
+          buttons.forEach(b => {
+            b.className = "flex items-center justify-between p-4 rounded-xl border border-transparent hover:bg-surface-variant/50 text-on-surface-variant transition-all group";
+            b.querySelector('span:last-child').className = "material-symbols-outlined opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all";
+          });
+          
+          btn.className = "flex items-center justify-between p-4 rounded-xl border border-primary/20 bg-primary/5 text-primary transition-all group";
+          btn.querySelector('span:last-child').className = "material-symbols-outlined group-hover:translate-x-1 transition-transform";
+          
+          // Update data values
+          const data = timelineData[view];
+          const cards = document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-3 > div');
+          if (cards.length >= 3) {
+            // Card 1
+            cards[0].querySelector('.font-display-lg').innerHTML = data.seedlings;
+            cards[0].querySelector('.font-body-md').innerHTML = data.seedlingsLabel;
+            
+            // Card 2
+            cards[1].querySelector('.font-display-lg').innerHTML = data.canopy;
+            cards[1].querySelector('.font-body-md').innerHTML = data.canopyLabel;
+            
+            // Card 3
+            cards[2].querySelector('.font-display-lg').innerHTML = data.forest;
+            cards[2].querySelector('.font-body-md').innerHTML = data.forestLabel;
+          }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+          const selectorCard = document.querySelector('.col-span-1.lg\\:col-span-4');
+          if (selectorCard) {
+            const btns = selectorCard.querySelectorAll('button');
+            if (btns.length >= 3) {
+              btns[0].setAttribute('onclick', "switchTimeline('daily', this)");
+              btns[1].setAttribute('onclick', "switchTimeline('weekly', this)");
+              btns[2].setAttribute('onclick', "switchTimeline('monthly', this)");
+            }
+          }
+        });
+      </script>
+    
+</body></html>

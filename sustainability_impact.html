@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DORMPULSE - Sustainability Impact</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        "colors": {
+          "primary": "#006e2f",            // Leaf Green
+          "primary-container": "#22c55e",  // Vibrant Green Accent
+          "on-primary": "#ffffff",
+          "secondary": "#00668a",          // Sky/Water Blue
+          "secondary-container": "#40c2fd",// Vibrant Sky Blue
+          "on-secondary": "#ffffff",
+          "tertiary": "#006d30",           // Forest Green
+          "tertiary-container": "#5ebf74", // Light Green Accent
+          "on-tertiary": "#ffffff",
+          "background": "#f8faf4",         // Extremely soft warm white/greenish-beige background
+          "on-background": "#00210a",      // Legible deep forest text
+          "surface": "#f8faf4",            // Matching background
+          "on-surface": "#00210a",         // Legible deep forest text
+          "surface-container": "#ecefe9",  // Slightly darker warm white/gray
+          "surface-container-low": "#f2f4ee",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-high": "#e7e9e3",
+          "surface-container-highest": "#e1e3dd",
+          "on-surface-variant": "#3d4a3d", // Organic slate gray for labels
+          "outline": "#6d7b6c",
+          "outline-variant": "#bccbb9",
+          "error": "#ba1a1a",
+          "error-container": "#ffdad6",
+          "on-error": "#ffffff",
+          "on-error-container": "#93000a"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.5rem",
+          "lg": "0.75rem",
+          "xl": "1rem",
+          "2xl": "1.5rem",
+          "3xl": "2rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "max-width": "1280px",
+          "margin-desktop": "4rem",
+          "cluster-gap": "1.75rem",
+          "zone-padding": "2.5rem",
+          "margin-mobile": "1.25rem"
+        },
+        "fontFamily": {
+          "sans": ["Outfit", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        .ecosystem-cluster {
+            background-color: theme('colors.surface-container-lowest');
+            border-radius: theme('borderRadius.cluster');
+            box-shadow: 0px 10px 40px rgba(31, 41, 55, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .ecosystem-cluster:hover {
+            transform: translateY(-4px);
+            box-shadow: 0px 20px 50px rgba(31, 41, 55, 0.06);
+        }
+
+        .energy-stream {
+            background: linear-gradient(135deg, theme('colors.primary'), theme('colors.tertiary'));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .organic-shape {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+        
+        .pulse-ring {
+            position: relative;
+        }
+        .pulse-ring::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: inherit;
+            background: theme('colors.primary-container');
+            opacity: 0.3;
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            z-index: -1;
+        }
+        
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.1); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-sans min-h-screen flex flex-col pt-24 selection:bg-primary-container selection:text-on-primary-container">
+
+<!-- TopNavBar Shared Component -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/90 border-b border-surface-variant/30 shadow-[0px_2px_15px_rgba(0,110,47,0.02)]">
+  <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-max-width mx-auto">
+    <!-- Brand Logo -->
+    <a class="flex items-center gap-2 group cursor-pointer" href="index.html">
+      <span class="material-symbols-outlined text-primary text-2xl filled group-hover:rotate-12 transition-transform duration-300">energy_savings_leaf</span>
+      <span class="font-bold text-lg tracking-tight text-primary">DORMPULSE</span>
+    </a>
+    
+    <!-- Navigation Links -->
+    <ul class="hidden md:flex items-center gap-8">
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="index.html" id="nav-overview">Overview</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="hostel_map.html" id="nav-hostel-map">Hostel Map</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="sustainability_impact.html" id="nav-impact">Impact</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="ai_advisor.html" id="nav-ai-advisor">AI Advisor</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="savings_timeline.html" id="nav-savings">Savings</a>
+      </li>
+      <li>
+        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="sdg7_goals.html" id="nav-sdg7">SDG 7</a>
+      </li>
+    </ul>
+
+    <!-- Trailing Actions -->
+    <div class="flex items-center gap-4">
+      <div class="hidden md:flex items-center gap-4">
+        <button class="text-on-surface-variant hover:text-primary transition-colors duration-300 flex items-center justify-center p-1.5 rounded-full hover:bg-surface-container-low" aria-label="Notifications">
+          <span class="material-symbols-outlined text-xl">notifications_active</span>
+        </button>
+        <button class="text-on-surface-variant hover:text-primary transition-colors duration-300 flex items-center justify-center p-1.5 rounded-full hover:bg-surface-container-low" aria-label="Profile">
+          <span class="material-symbols-outlined text-xl">account_circle</span>
+        </button>
+      </div>
+      <button class="bg-primary hover:bg-[#005321] text-on-primary px-5 py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 shadow-[0_4px_12px_rgba(0,110,47,0.15)] hover:shadow-[0_6px_18px_rgba(0,110,47,0.25)] active:scale-95 whitespace-nowrap" onclick="openOptimizeModal()">
+        Optimize Now
+      </button>
+      <!-- Mobile Menu Toggle -->
+      <button class="md:hidden text-on-surface-variant flex items-center justify-center p-1.5 rounded-full hover:bg-surface-container-low" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+        <span class="material-symbols-outlined text-2xl">menu</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Mobile Navigation Dropdown -->
+  <div class="hidden md:hidden border-t border-surface-variant/30 bg-surface/95 py-4 px-margin-mobile flex flex-col gap-3 shadow-lg" id="mobile-nav-menu">
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="index.html">Overview</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="hostel_map.html">Hostel Map</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="sustainability_impact.html">Impact</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="ai_advisor.html">AI Advisor</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="savings_timeline.html">Savings</a>
+    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2" href="sdg7_goals.html">SDG 7</a>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Dynamic active page styling
+    const path = window.location.pathname;
+    const page = path.split('/').pop() || 'index.html';
+    
+    let activeId = 'nav-overview';
+    if (page === 'hostel_map.html') activeId = 'nav-hostel-map';
+    else if (page === 'sustainability_impact.html') activeId = 'nav-impact';
+    else if (page === 'ai_advisor.html') activeId = 'nav-ai-advisor';
+    else if (page === 'savings_timeline.html') activeId = 'nav-savings';
+    else if (page === 'sdg7_goals.html') activeId = 'nav-sdg7';
+    
+    const activeLink = document.getElementById(activeId);
+    if (activeLink) {
+      activeLink.className = "text-primary font-bold border-b-2 border-primary pb-1 text-sm";
+    }
+
+    // Mobile menu toggle logic
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-nav-menu');
+    if (btn && menu) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('hidden');
+      });
+      document.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
+    }
+  });
+</script>
+
+<main class="flex-grow pt-32 pb-zone-padding px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full space-y-zone-padding">
+<!-- Header Zone -->
+<header class="text-center max-w-3xl mx-auto space-y-4">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface tracking-tighter">
+                Your <span class="energy-stream">Environmental Resonance</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                Every watt saved ripples through the ecosystem. Watch your collective impact grow as automated efficiency transforms the living space.
+            </p>
+</header>
+<!-- Primary Impact Cluster (Bento Layout) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-cluster-gap">
+<!-- Virtual Forest Metaphor -->
+<div class="ecosystem-cluster md:col-span-8 p-8 relative overflow-hidden flex flex-col justify-between min-h-[400px]">
+<div class="z-10 relative">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">The Virtual Canopy</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">Your energy optimization has cultivated a digital equivalent of 14 mature oak trees this semester.</p>
+</div>
+<div class="z-10 relative mt-auto">
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-primary">14</span>
+<span class="font-label-caps text-label-caps text-outline">TREES EQUIVALENT</span>
+</div>
+</div>
+<!-- Decorative Organic Elements -->
+<div class="absolute right-0 bottom-0 w-64 h-64 bg-primary-container/20 organic-shape blur-2xl transform translate-x-1/4 translate-y-1/4"></div>
+<div class="absolute right-20 top-10 w-32 h-32 bg-secondary-container/20 organic-shape blur-xl"></div>
+<!-- Placeholder for actual visualization -->
+<div class="absolute inset-y-0 right-0 w-1/2 opacity-80 mix-blend-multiply pointer-events-none" data-alt="A lush, dense forest canopy viewed from below, sunlight filtering through vibrant green leaves. The lighting is soft and natural, emphasizing the organic interconnectedness of the branches. The mood is tranquil and life-affirming, fitting a modern, eco-conscious digital twin interface. The color palette leans heavily into deep forest greens and bright chartreuse accents against a subtle sky backdrop." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCFNyWe5R-E3SudpfeStJ8pDe1CFpzY6MSdvDcb9inWIaJ-8BlV2DyjgZr0YQxeMme8qoeZICCEwvCfXcCxs3iBK4JfEy4sBrzpL8T5NaQb5MztSadWmHsSXM28YDYN_XPkBcbV4ULTZ9FVNxQ8kV3fKqaGXKkb3wMQPqP0ArYGomzPgcjuxDbLn-IRsWoVpkCicU61glxS4T8wOspL_TOR-qMbuX8y0IjWGum7q22OiWRapi4VUJhRLQ'); background-size: cover; background-position: right center; -webkit-mask-image: linear-gradient(to right, transparent, black);">
+</div>
+</div>
+<!-- CO2 Reduction -->
+<div class="ecosystem-cluster md:col-span-4 p-8 flex flex-col justify-center items-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-6 pulse-ring">
+<span class="material-symbols-outlined text-primary text-3xl">co2</span>
+</div>
+<h3 class="font-label-caps text-label-caps text-outline mb-2">CARBON MITIGATION</h3>
+<div class="font-display-lg-mobile text-display-lg-mobile text-on-surface mb-1">1,240 <span class="text-headline-md font-headline-md text-on-surface-variant">kg</span></div>
+<p class="font-body-md text-body-md text-on-surface-variant">Prevented from entering the atmosphere this month.</p>
+</div>
+<!-- Financial Translation -->
+<div class="ecosystem-cluster md:col-span-5 p-8 relative overflow-hidden">
+<h3 class="font-label-caps text-label-caps text-outline mb-6">ECONOMIC SYMBIOSIS</h3>
+<div class="space-y-4 relative z-10">
+<div>
+<div class="font-body-md text-body-md text-on-surface-variant mb-1">Savings Accumulated</div>
+<div class="font-headline-md text-headline-md text-tertiary">$3,450.00</div>
+</div>
+<div class="h-px w-full bg-surface-variant"></div>
+<div>
+<div class="font-body-md text-body-md text-on-surface-variant mb-1">Reinvested in Eco-Upgrades</div>
+<div class="font-headline-md text-headline-md text-primary">$2,100.00</div>
+</div>
+</div>
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-surface-container rounded-full opacity-50"></div>
+</div>
+<!-- Energy Trajectory (Tendril Concept) -->
+<div class="ecosystem-cluster md:col-span-7 p-8">
+<h3 class="font-label-caps text-label-caps text-outline mb-6">EFFICIENCY TRAJECTORY</h3>
+<div class="h-48 w-full flex items-end gap-2 relative">
+<!-- Simplistic organic bars for trajectory -->
+<div class="w-1/6 bg-surface-container rounded-t-full h-1/2 relative group">
+<div class="absolute -top-8 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity font-label-caps text-label-caps text-on-surface">MAY</div>
+</div>
+<div class="w-1/6 bg-surface-container rounded-t-full h-3/5 relative group">
+<div class="absolute -top-8 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity font-label-caps text-label-caps text-on-surface">JUN</div>
+</div>
+<div class="w-1/6 bg-surface-variant rounded-t-full h-4/5 relative group">
+<div class="absolute -top-8 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity font-label-caps text-label-caps text-on-surface">JUL</div>
+</div>
+<div class="w-1/6 bg-outline-variant rounded-t-full h-2/5 relative group">
+<div class="absolute -top-8 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity font-label-caps text-label-caps text-on-surface">AUG</div>
+</div>
+<div class="w-1/6 bg-tertiary-fixed rounded-t-full h-1/4 relative group pulse-ring">
+<div class="absolute -top-8 w-full text-center opacity-100 font-label-caps text-label-caps text-primary">SEP</div>
+</div>
+<!-- Decorative Tendril overlay -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" preserveaspectratio="none" viewbox="0 0 100 100">
+<path class="text-primary opacity-50" d="M0,50 Q20,60 40,30 T80,70 T100,20" fill="none" stroke="currentColor" stroke-dasharray="5 5" stroke-width="2"></path>
+<path class="text-tertiary" d="M0,60 Q30,40 50,70 T90,30 T100,80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+
+<footer class="w-full py-zone-padding mt-zone-padding bg-surface-container-low/50 border-t border-surface-variant/20">
+  <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop gap-cluster-gap max-w-max-width mx-auto">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-xl filled">energy_savings_leaf</span>
+      <span class="font-bold text-base tracking-tight text-primary">DORMPULSE</span>
+    </div>
+    <div class="flex flex-wrap justify-center gap-6">
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Energy Protocol</a>
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Privacy Policy</a>
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="sustainability_impact.html">Impact Report</a>
+      <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Support</a>
+    </div>
+    <div class="text-xs font-medium tracking-wide text-on-surface-variant text-center md:text-right">
+      © 2026 DormPulse Ecosystem. Powered by AI for a greener planet.
+    </div>
+  </div>
+</footer>
+
+
+<!-- Global Optimize Now Modal -->
+<div id="optimize-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-[#00210a]/40 backdrop-blur-sm" onclick="closeOptimizeModal()"></div>
+  <div class="bg-white rounded-3xl p-8 max-w-md w-full relative z-10 shadow-2xl border border-surface-variant/30 transform transition-transform duration-300 scale-95 opacity-0" id="optimize-modal-card">
+    <h3 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+      <span class="material-symbols-outlined animate-spin">sync</span> Optimizing Ecosystem...
+    </h3>
+    <div class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+      <p id="opt-step-1" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Analyzing HVAC baselines...</p>
+      <p id="opt-step-2" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Checking room occupancy logs...</p>
+      <p id="opt-step-3" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Triggering auto-shutoff for vacant zones...</p>
+      <p id="opt-step-4" class="flex items-center gap-2 opacity-50"><span class="material-symbols-outlined text-sm">circle</span> Recalibrating lighting curves...</p>
+    </div>
+    <div class="mt-6 flex justify-end">
+      <button id="opt-close-btn" class="bg-primary text-on-primary px-6 py-2 rounded-full font-medium opacity-50 cursor-not-allowed" disabled onclick="closeOptimizeModal()">
+        Optimizing...
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  function openOptimizeModal() {
+    const modal = document.getElementById('optimize-modal');
+    const card = document.getElementById('optimize-modal-card');
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+      card.classList.remove('scale-95', 'opacity-0');
+      card.classList.add('scale-100', 'opacity-100');
+    }, 10);
+    
+    // Run simulated optimization steps
+    const steps = [
+      { id: 'opt-step-1', text: 'Analyzing HVAC baselines... Done!' },
+      { id: 'opt-step-2', text: 'Checking room occupancy logs... Done!' },
+      { id: 'opt-step-3', text: 'Triggering auto-shutoff for vacant zones... Done!' },
+      { id: 'opt-step-4', text: 'Recalibrating lighting curves... Completed!' }
+    ];
+    
+    steps.forEach((step, idx) => {
+      setTimeout(() => {
+        const el = document.getElementById(step.id);
+        if (el) {
+          el.innerHTML = '<span class="material-symbols-outlined text-primary text-sm font-bold">check_circle</span> ' + step.text;
+          el.classList.remove('opacity-50');
+          el.classList.add('text-on-surface');
+        }
+        
+        if (idx === steps.length - 1) {
+          const btn = document.getElementById('opt-close-btn');
+          if (btn) {
+            btn.disabled = false;
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            btn.innerText = 'All Done';
+          }
+        }
+      }, (idx + 1) * 800);
+    });
+  }
+  
+  function closeOptimizeModal() {
+    const modal = document.getElementById('optimize-modal');
+    const card = document.getElementById('optimize-modal-card');
+    card.classList.remove('scale-100', 'opacity-100');
+    card.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      // Reset steps
+      const steps = ['opt-step-1', 'opt-step-2', 'opt-step-3', 'opt-step-4'];
+      const defaultTexts = [
+        'Analyzing HVAC baselines...',
+        'Checking room occupancy logs...',
+        'Triggering auto-shutoff for vacant zones...',
+        'Recalibrating lighting curves...'
+      ];
+      steps.forEach((id, idx) => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.innerHTML = '<span class="material-symbols-outlined text-sm">circle</span> ' + defaultTexts[idx];
+          el.className = 'flex items-center gap-2 opacity-50';
+        }
+      });
+      const btn = document.getElementById('opt-close-btn');
+      if (btn) {
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+        btn.innerText = 'Optimizing...';
+      }
+    }, 300);
+  }
+</script>
+
+<script type="module" src="/agentation-mount.js"></script>
+</body></html>
