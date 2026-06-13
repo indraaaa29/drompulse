@@ -29,3 +29,5 @@ npm-debug.log*
 # Internal tooling (not needed by public contributors)
 download.js
 download.ps1
+
+.vercel
