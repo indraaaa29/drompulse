@@ -6,15 +6,14 @@ const screens = [
   { src: 'hostel_map.html', dest: 'hostel_map.html' },
   { src: 'sustainability_impact.html', dest: 'sustainability_impact.html' },
   { src: 'ai_advisor.html', dest: 'ai_advisor.html' },
-  { src: 'savings_timeline.html', dest: 'savings_timeline.html' },
-  { src: 'sdg7_goals.html', dest: 'sdg7_goals.html' }
+  { src: 'savings_timeline.html', dest: 'savings_timeline.html' }
 ];
 
 const tempDir = path.join(__dirname, 'temp_stitch');
 const outDir = __dirname;
 
 // Clean up unused/deleted HTML pages from root directory
-const filesToDelete = ['dormpulse_flow.html', 'room_insights.html', 'shader.html'];
+const filesToDelete = ['dormpulse_flow.html', 'room_insights.html', 'shader.html', 'sdg7_goals.html'];
 filesToDelete.forEach(file => {
   const filePath = path.join(outDir, file);
   if (fs.existsSync(filePath)) {
@@ -108,9 +107,6 @@ const headerHtml = `
       <li>
         <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="savings_timeline.html" id="nav-savings">Savings</a>
       </li>
-      <li>
-        <a class="text-on-surface-variant font-medium text-sm hover:text-primary transition-all duration-300 pb-1" href="sdg7_goals.html" id="nav-sdg7">SDG 7</a>
-      </li>
     </ul>
 
     <!-- Trailing Actions -->
@@ -140,7 +136,6 @@ const headerHtml = `
     <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="sustainability_impact.html">Impact</a>
     <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="ai_advisor.html">AI Advisor</a>
     <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2 border-b border-surface-variant/10" href="savings_timeline.html">Savings</a>
-    <a class="text-on-surface-variant font-medium text-sm hover:text-primary py-2" href="sdg7_goals.html">SDG 7</a>
   </div>
 </nav>
 
@@ -155,7 +150,6 @@ const headerHtml = `
     else if (page === 'sustainability_impact.html') activeId = 'nav-impact';
     else if (page === 'ai_advisor.html') activeId = 'nav-ai-advisor';
     else if (page === 'savings_timeline.html') activeId = 'nav-savings';
-    else if (page === 'sdg7_goals.html') activeId = 'nav-sdg7';
     
     const activeLink = document.getElementById(activeId);
     if (activeLink) {
