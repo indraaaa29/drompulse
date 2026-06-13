@@ -1,7 +1,7 @@
 {
-  "name": "drompulse",
+  "name": "enervia",
   "version": "1.0.0",
-  "description": "DormPulse Eco-Energy Ecosystem",
+  "description": "Enervia Eco-Energy Ecosystem",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

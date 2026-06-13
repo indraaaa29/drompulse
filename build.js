@@ -87,7 +87,7 @@ const headerHtml = `
     <!-- Brand Logo -->
     <a class="flex items-center gap-2 group cursor-pointer" href="index.html">
       <span class="material-symbols-outlined text-primary text-2xl filled group-hover:rotate-12 transition-transform duration-300">energy_savings_leaf</span>
-      <span class="font-bold text-lg tracking-tight text-primary">DORMPULSE</span>
+      <span class="font-bold text-lg tracking-tight text-primary">ENERVIA</span>
     </a>
     
     <!-- Navigation Links -->
@@ -178,7 +178,7 @@ const footerHtml = `
   <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop gap-cluster-gap max-w-max-width mx-auto">
     <div class="flex items-center gap-2">
       <span class="material-symbols-outlined text-primary text-xl filled">energy_savings_leaf</span>
-      <span class="font-bold text-base tracking-tight text-primary">DORMPULSE</span>
+      <span class="font-bold text-base tracking-tight text-primary">ENERVIA</span>
     </div>
     <div class="flex flex-wrap justify-center gap-6">
       <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Energy Protocol</a>
@@ -187,7 +187,7 @@ const footerHtml = `
       <a class="text-xs font-semibold tracking-wider uppercase text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Support</a>
     </div>
     <div class="text-xs font-medium tracking-wide text-on-surface-variant text-center md:text-right">
-      © 2026 DormPulse Ecosystem. Powered by AI for a greener planet.
+      © 2026 Enervia Ecosystem. Powered by AI for a greener planet.
     </div>
   </div>
 </footer>
@@ -420,6 +420,121 @@ screens.forEach(screen => {
     const roomDataScript = `
       <script>
         const roomData = {
+          // Floor 1
+          "101": {
+            name: "Room 101",
+            status: "Wasteful",
+            statusClass: "bg-red-100 text-red-700 border-red-200",
+            statusIcon: "warning",
+            occupancy: "0/2",
+            draw: "1.4 kW",
+            drawClass: "text-red-600",
+            appliances: [
+              { name: "AC Unit (Running)", draw: "1000W", icon: "ac_unit", iconClass: "text-primary" },
+              { name: "Lights (Empty Room)", draw: "150W", icon: "lightbulb", iconClass: "text-amber-500" },
+              { name: "Desktop PC (Standby)", draw: "250W", icon: "desktop_windows", iconClass: "text-primary" }
+            ]
+          },
+          "102": {
+            name: "Room 102",
+            status: "Efficient",
+            statusClass: "bg-green-100 text-green-700 border-green-200",
+            statusIcon: "eco",
+            occupancy: "2/2",
+            draw: "0.15 kW",
+            drawClass: "text-green-600",
+            appliances: [
+              { name: "Lights (LED)", draw: "40W", icon: "lightbulb", iconClass: "text-primary" },
+              { name: "Ceiling Fan", draw: "60W", icon: "mode_fan", iconClass: "text-primary" },
+              { name: "Laptop Charger", draw: "50W", icon: "power", iconClass: "text-primary" }
+            ]
+          },
+          "103": {
+            name: "Room 103",
+            status: "Moderate",
+            statusClass: "bg-amber-100 text-amber-700 border-amber-200",
+            statusIcon: "info",
+            occupancy: "1/2",
+            draw: "0.75 kW",
+            drawClass: "text-amber-600",
+            appliances: [
+              { name: "Air Purifier", draw: "80W", icon: "airwave", iconClass: "text-primary" },
+              { name: "Ceiling Fan", draw: "60W", icon: "mode_fan", iconClass: "text-primary" },
+              { name: "Gaming PC", draw: "600W", icon: "desktop_windows", iconClass: "text-secondary" },
+              { name: "Lights", draw: "10W", icon: "lightbulb", iconClass: "text-primary" }
+            ]
+          },
+          "104": {
+            name: "Room 104 (Dorm)",
+            status: "Automated",
+            statusClass: "bg-blue-100 text-blue-700 border-blue-200",
+            statusIcon: "smart_toy",
+            occupancy: "0/4",
+            draw: "0.05 kW",
+            drawClass: "text-blue-600",
+            appliances: [
+              { name: "Smart Sensors", draw: "10W", icon: "sensors", iconClass: "text-secondary" },
+              { name: "Smart Hub", draw: "15W", icon: "settings_input_component", iconClass: "text-secondary" },
+              { name: "Standby Devices", draw: "25W", icon: "power", iconClass: "text-primary" }
+            ]
+          },
+          "105": {
+            name: "Room 105",
+            status: "Efficient",
+            statusClass: "bg-green-100 text-green-700 border-green-200",
+            statusIcon: "eco",
+            occupancy: "1/2",
+            draw: "0.1 kW",
+            drawClass: "text-green-600",
+            appliances: [
+              { name: "LED Study Lamp", draw: "15W", icon: "lightbulb", iconClass: "text-primary" },
+              { name: "Ceiling Fan", draw: "35W", icon: "mode_fan", iconClass: "text-primary" },
+              { name: "Laptop", draw: "50W", icon: "laptop", iconClass: "text-primary" }
+            ]
+          },
+          "106": {
+            name: "Room 106 (Dorm)",
+            status: "Wasteful",
+            statusClass: "bg-red-100 text-red-700 border-red-200",
+            statusIcon: "warning",
+            occupancy: "0/4",
+            draw: "1.6 kW",
+            drawClass: "text-red-600",
+            appliances: [
+              { name: "Space Heater (Running)", draw: "1500W", icon: "heat_pump", iconClass: "text-primary" },
+              { name: "Lights (On)", draw: "100W", icon: "lightbulb", iconClass: "text-amber-500" }
+            ]
+          },
+          "1-Lounge": {
+            name: "Common Lounge",
+            status: "Efficient",
+            statusClass: "bg-green-100 text-green-700 border-green-200",
+            statusIcon: "eco",
+            occupancy: "3/15",
+            draw: "0.4 kW",
+            drawClass: "text-green-600",
+            appliances: [
+              { name: "Ceiling Fans (2x)", draw: "120W", icon: "mode_fan", iconClass: "text-primary" },
+              { name: "Overhead Lights", draw: "80W", icon: "lightbulb", iconClass: "text-primary" },
+              { name: "Fridge (Eco Mode)", draw: "200W", icon: "kitchen", iconClass: "text-primary" }
+            ]
+          },
+          "1-Bath": {
+            name: "Washroom Block",
+            status: "Automated",
+            statusClass: "bg-blue-100 text-blue-700 border-blue-200",
+            statusIcon: "smart_toy",
+            occupancy: "0/5",
+            draw: "0.02 kW",
+            drawClass: "text-blue-600",
+            appliances: [
+              { name: "Motion Sensors", draw: "10W", icon: "sensors", iconClass: "text-secondary" },
+              { name: "LED Lights (Off)", draw: "0W", icon: "lightbulb", iconClass: "text-outline/50" },
+              { name: "Exhaust Fan (Off)", draw: "10W", icon: "mode_fan", iconClass: "text-outline/50" }
+            ]
+          },
+
+          // Floor 2
           "201": {
             name: "Room 201",
             status: "Efficient",
@@ -504,7 +619,7 @@ screens.forEach(screen => {
               { name: "Ambient Lights", draw: "60W", icon: "lightbulb", iconClass: "text-primary" }
             ]
           },
-          "Lounge": {
+          "2-Lounge": {
             name: "Common Lounge",
             status: "Moderate",
             statusClass: "bg-amber-100 text-amber-700 border-amber-200",
@@ -519,7 +634,7 @@ screens.forEach(screen => {
               { name: "Overhead Lighting", draw: "300W", icon: "lightbulb", iconClass: "text-primary" }
             ]
           },
-          "Bath": {
+          "2-Bath": {
             name: "Washroom Block",
             status: "Automated",
             statusClass: "bg-blue-100 text-blue-700 border-blue-200",
@@ -531,8 +646,199 @@ screens.forEach(screen => {
               { name: "Sensors & Controller", draw: "15W", icon: "settings_input_component", iconClass: "text-secondary" },
               { name: "Exhaust Fans (Standby)", draw: "30W", icon: "mode_fan", iconClass: "text-primary" }
             ]
+          },
+
+          // Floor 3
+          "301": {
+            name: "Room 301",
+            status: "Efficient",
+            statusClass: "bg-green-100 text-green-700 border-green-200",
+            statusIcon: "eco",
+            occupancy: "1/2",
+            draw: "0.1 kW",
+            drawClass: "text-green-600",
+            appliances: [
+              { name: "Lights (LED)", draw: "20W", icon: "lightbulb", iconClass: "text-primary" },
+              { name: "Ceiling Fan", draw: "40W", icon: "mode_fan", iconClass: "text-primary" },
+              { name: "Phone Charger", draw: "40W", icon: "power", iconClass: "text-primary" }
+            ]
+          },
+          "302": {
+            name: "Room 302",
+            status: "Automated",
+            statusClass: "bg-blue-100 text-blue-700 border-blue-200",
+            statusIcon: "smart_toy",
+            occupancy: "1/2",
+            draw: "0.25 kW",
+            drawClass: "text-blue-600",
+            appliances: [
+              { name: "LED Study Lamp", draw: "15W", icon: "lightbulb", iconClass: "text-primary" },
+              { name: "Ceiling Fan (Low)", draw: "30W", icon: "mode_fan", iconClass: "text-primary" },
+              { name: "Charger", draw: "40W", icon: "power", iconClass: "text-primary" }
+            ]
+          },
+          "303": {
+            name: "Room 303",
+            status: "Wasteful",
+            statusClass: "bg-red-100 text-red-700 border-red-200",
+            statusIcon: "warning",
+            occupancy: "2/2",
+            draw: "2.1 kW",
+            drawClass: "text-red-600",
+            appliances: [
+              { name: "AC Unit (Running)", draw: "1200W", icon: "ac_unit", iconClass: "text-primary" },
+              { name: "Gaming PC (Active)", draw: "800W", icon: "desktop_windows", iconClass: "text-secondary" },
+              { name: "Lights (On)", draw: "100W", icon: "lightbulb", iconClass: "text-primary" }
+            ]
+          },
+          "304": {
+            name: "Room 304 (Dorm)",
+            status: "Moderate",
+            statusClass: "bg-amber-100 text-amber-700 border-amber-200",
+            statusIcon: "info",
+            occupancy: "2/4",
+            draw: "0.9 kW",
+            drawClass: "text-amber-600",
+            appliances: [
+              { name: "Space Heater (Low)", draw: "800W", icon: "heat_pump", iconClass: "text-primary" },
+              { name: "LED Study Lamp", draw: "15W", icon: "lightbulb", iconClass: "text-primary" },
+              { name: "Ceiling Fan", draw: "30W", icon: "mode_fan", iconClass: "text-primary" }
+            ]
+          },
+          "305": {
+            name: "Room 305",
+            status: "Efficient",
+            statusClass: "bg-green-100 text-green-700 border-green-200",
+            statusIcon: "eco",
+            occupancy: "1/2",
+            draw: "0.08 kW",
+            drawClass: "text-green-600",
+            appliances: [
+              { name: "LED Study Lamp", draw: "10W", icon: "lightbulb", iconClass: "text-primary" },
+              { name: "Laptop PC", draw: "50W", icon: "laptop", iconClass: "text-primary" },
+              { name: "Phone Charger", draw: "5W", icon: "power", iconClass: "text-primary" }
+            ]
+          },
+          "306": {
+            name: "Room 306 (Dorm)",
+            status: "Efficient",
+            statusClass: "bg-green-100 text-green-700 border-green-200",
+            statusIcon: "eco",
+            occupancy: "2/4",
+            draw: "0.12 kW",
+            drawClass: "text-green-600",
+            appliances: [
+              { name: "Ceiling Fan", draw: "40W", icon: "mode_fan", iconClass: "text-primary" },
+              { name: "Study Lamp", draw: "15W", icon: "lightbulb", iconClass: "text-primary" },
+              { name: "Laptop Charger", draw: "45W", icon: "power", iconClass: "text-primary" }
+            ]
+          },
+          "3-Lounge": {
+            name: "Common Lounge",
+            status: "Wasteful",
+            statusClass: "bg-red-100 text-red-700 border-red-200",
+            statusIcon: "warning",
+            occupancy: "12/15",
+            draw: "3.8 kW",
+            drawClass: "text-red-600",
+            appliances: [
+              { name: "Large AC (Max)", draw: "2400W", icon: "ac_unit", iconClass: "text-primary" },
+              { name: "Big Screen TV", draw: "300W", icon: "tv", iconClass: "text-secondary" },
+              { name: "Sound System", draw: "200W", icon: "speaker", iconClass: "text-secondary" },
+              { name: "Overhead Lights", draw: "500W", icon: "lightbulb", iconClass: "text-amber-500" },
+              { name: "Microwave", draw: "400W", icon: "kitchen", iconClass: "text-primary" }
+            ]
+          },
+          "3-Bath": {
+            name: "Washroom Block",
+            status: "Automated",
+            statusClass: "bg-blue-100 text-blue-700 border-blue-200",
+            statusIcon: "smart_toy",
+            occupancy: "0/5",
+            draw: "0.04 kW",
+            drawClass: "text-blue-600",
+            appliances: [
+              { name: "Motion Sensors", draw: "10W", icon: "sensors", iconClass: "text-secondary" },
+              { name: "Exhaust Fan", draw: "30W", icon: "mode_fan", iconClass: "text-primary" }
+            ]
           }
         };
+
+        let currentFloor = 2;
+
+        function switchFloor(floorNum) {
+          currentFloor = floorNum;
+
+          // Update header
+          const ordinals = { 1: '1st', 2: '2nd', 3: '3rd' };
+          document.getElementById('floor-heading').innerText = \`North Wing - \${ordinals[floorNum]} Floor\`;
+
+          // Update active button state
+          for (let i = 1; i <= 3; i++) {
+            const btn = document.getElementById(\`btn-floor-\${i}\`);
+            if (btn) {
+              if (i === floorNum) {
+                btn.className = "px-4 py-2 rounded-full text-sm font-medium bg-surface text-primary shadow-sm border border-outline-variant transition-colors";
+              } else {
+                btn.className = "px-4 py-2 rounded-full text-sm font-medium text-on-surface-variant hover:bg-surface transition-colors";
+              }
+            }
+          }
+
+          // Update room groups in the SVG map
+          const rooms = document.querySelectorAll('.room');
+          rooms.forEach(r => {
+            const base = r.getAttribute('data-room-base');
+            let newId = '';
+            let newText = '';
+            
+            if (base === 'Lounge') {
+              newId = \`\${floorNum}-Lounge\`;
+              newText = 'COMMON LOUNGE';
+            } else if (base === 'Bath') {
+              newId = \`\${floorNum}-Bath\`;
+              newText = 'WASHROOM';
+            } else {
+              newId = \`\${floorNum}\${base}\`;
+              newText = newId;
+              if (base === '04' || base === '06') {
+                newText += ' (DORM)';
+              }
+            }
+
+            // Update DOM element properties
+            r.id = \`room-\${newId}\`;
+            r.setAttribute('onclick', \`selectRoom('\${newId}')\`);
+            
+            const textEl = r.querySelector('text');
+            if (textEl) {
+              textEl.textContent = newText;
+            }
+
+            // Get status for this new room to update visual styles
+            const data = roomData[newId];
+            if (data) {
+              const rect = r.querySelector('rect');
+              if (rect) {
+                // Remove existing status classes and add new status class
+                rect.className.baseVal = '';
+                rect.classList.add('room-' + data.status.toLowerCase());
+              }
+
+              const circle = r.querySelector('circle');
+              if (circle) {
+                let color = '#22c55e';
+                if (data.status === 'Wasteful') color = '#ef4444';
+                else if (data.status === 'Moderate') color = '#f59e0b';
+                else if (data.status === 'Automated') color = '#3b82f6';
+                circle.setAttribute('fill', color);
+              }
+            }
+          });
+
+          // Automatically select the default room of the new floor in the inspector
+          selectRoom(\`\${floorNum}02\`);
+        }
 
         function selectRoom(roomId) {
           console.log("Inspecting room:", roomId);
@@ -606,7 +912,7 @@ screens.forEach(screen => {
           btn.innerHTML = \`<svg class="animate-spin h-5 w-5 mr-2 text-on-surface" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Shutting off...\`;
           
           setTimeout(() => {
-            // Update data status to Efficient
+            // Update data status to Automated
             const data = roomData[roomId];
             data.status = 'Automated';
             data.statusClass = 'bg-blue-100 text-blue-700 border-blue-200';
@@ -615,8 +921,8 @@ screens.forEach(screen => {
             data.drawClass = 'text-blue-600';
             // Turn off AC / Lights in appliances list
             data.appliances = data.appliances.map(app => {
-              if (app.name.includes('AC') || app.name.includes('Lights')) {
-                return { ...app, name: app.name.replace('Running', 'Shutoff').replace('Empty Room', 'Off'), draw: '0W', iconClass: 'text-outline/50' };
+              if (app.name.includes('AC') || app.name.includes('Lights') || app.name.includes('Heater')) {
+                return { ...app, name: app.name.replace('Running', 'Shutoff').replace('Empty Room', 'Off').replace('On', 'Off'), draw: '0W', iconClass: 'text-outline/50' };
               }
               return app;
             });
@@ -624,10 +930,18 @@ screens.forEach(screen => {
             // Re-render
             selectRoom(roomId);
             
+            // Sync current floor SVG map colors
+            switchFloor(currentFloor);
+            
             // Show toast message
             alert(\`Auto-shutoff successfully triggered for \${data.name}. HVAC and non-essential loads deactivated.\`);
           }, 1500);
         }
+
+        // Initialize with default room 202 selection
+        document.addEventListener('DOMContentLoaded', () => {
+          selectRoom('202');
+        });
       </script>
     `;
     
@@ -721,7 +1035,7 @@ screens.forEach(screen => {
           
           // Update data values
           const data = timelineData[view];
-          const cards = document.querySelectorAll('.grid.grid-cols-1.md\\\\:grid-cols-3 > div');
+          const cards = document.querySelectorAll('#timeline-cards > div');
           if (cards.length >= 3) {
             // Card 1
             cards[0].querySelector('.font-display-lg').innerHTML = data.seedlings;
@@ -737,7 +1051,7 @@ screens.forEach(screen => {
           }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        function initTimeline() {
           const selectorCard = document.querySelector('.col-span-1.lg\\\\:col-span-4');
           if (selectorCard) {
             const btns = selectorCard.querySelectorAll('button');
@@ -747,7 +1061,13 @@ screens.forEach(screen => {
               btns[2].setAttribute('onclick', "switchTimeline('monthly', this)");
             }
           }
-        });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initTimeline);
+        } else {
+          initTimeline();
+        }
       </script>
     `;
     html = html.replace('</body>', `${savingsScript}\n</body>`);

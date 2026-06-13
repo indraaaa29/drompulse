@@ -3,7 +3,7 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>DormPulse - Interactive Hostel Map</title>
+<title>Enervia - Interactive Hostel Map</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -171,16 +171,16 @@
 <!-- Header Zone -->
 <header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-cluster-gap">
 <div>
-<h1 class="font-headline-md text-headline-md text-on-surface mb-2">North Wing - 2nd Floor</h1>
+<h1 id="floor-heading" class="font-headline-md text-headline-md text-on-surface mb-2">North Wing - 2nd Floor</h1>
 <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
                     Live view of energy consumption and occupancy. Click on any room to inspect automated saving protocols and current appliance status.
                 </p>
 </div>
 <!-- Floor Selector -->
 <div class="bg-surface-container-low rounded-full p-1 flex shadow-sm border border-surface-variant">
-<button class="px-4 py-2 rounded-full text-sm font-medium text-on-surface-variant hover:bg-surface transition-colors">Floor 1</button>
-<button class="px-4 py-2 rounded-full text-sm font-medium bg-surface text-primary shadow-sm border border-outline-variant">Floor 2</button>
-<button class="px-4 py-2 rounded-full text-sm font-medium text-on-surface-variant hover:bg-surface transition-colors">Floor 3</button>
+<button id="btn-floor-1" onclick="switchFloor(1)" class="px-4 py-2 rounded-full text-sm font-medium text-on-surface-variant hover:bg-surface transition-colors">Floor 1</button>
+<button id="btn-floor-2" onclick="switchFloor(2)" class="px-4 py-2 rounded-full text-sm font-medium bg-surface text-primary shadow-sm border border-outline-variant">Floor 2</button>
+<button id="btn-floor-3" onclick="switchFloor(3)" class="px-4 py-2 rounded-full text-sm font-medium text-on-surface-variant hover:bg-surface transition-colors">Floor 3</button>
 </div>
 </header>
 <!-- Map & Details Ecosystem Cluster -->
@@ -201,47 +201,47 @@
 <text class="fill-outline text-sm font-label-caps" text-anchor="middle" x="400" y="255">MAIN CORRIDOR</text>
 <!-- Top Row Rooms -->
 <!-- Room 201: Efficient -->
-<g class="room" id="room-201" onclick="selectRoom('201')">
+<g class="room" id="room-201" data-room-base="01" onclick="selectRoom('201')">
 <rect class="room-efficient" height="150" rx="12" width="130" x="50" y="50"></rect>
 <text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="115" y="125">201</text>
 <circle class="animate-pulse" cx="150" cy="80" fill="#22c55e" r="6"></circle>
 </g>
 <!-- Room 202: Wasteful -->
-<g class="room" id="room-202" onclick="selectRoom('202')">
+<g class="room" id="room-202" data-room-base="02" onclick="selectRoom('202')">
 <rect class="room-wasteful" height="150" rx="12" width="130" x="190" y="50"></rect>
 <text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="255" y="125">202</text>
 <circle class="animate-pulse" cx="290" cy="80" fill="#ef4444" r="6"></circle>
 </g>
 <!-- Lounge Area: Moderate -->
-<g class="room" id="room-Lounge" onclick="selectRoom('Lounge')">
+<g class="room" id="room-Lounge" data-room-base="Lounge" onclick="selectRoom('Lounge')">
 <rect class="room-moderate" height="150" rx="12" width="280" x="330" y="50"></rect>
 <text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="470" y="125">COMMON LOUNGE</text>
 <circle class="animate-pulse" cx="580" cy="80" fill="#f59e0b" r="8"></circle>
 </g>
 <!-- Room 203: Automated -->
-<g class="room" id="room-203" onclick="selectRoom('203')">
+<g class="room" id="room-203" data-room-base="03" onclick="selectRoom('203')">
 <rect class="room-automated" height="150" rx="12" width="130" x="620" y="50"></rect>
 <text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="685" y="125">203</text>
 <circle class="animate-pulse" cx="720" cy="80" fill="#3b82f6" r="6"></circle>
 </g>
 <!-- Bottom Row Rooms -->
 <!-- Room 204: Efficient -->
-<g class="room" id="room-204" onclick="selectRoom('204')">
+<g class="room" id="room-204" data-room-base="04" onclick="selectRoom('204')">
 <rect class="room-efficient" height="150" rx="12" width="200" x="50" y="300"></rect>
 <text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="150" y="385">204 (DORM)</text>
 </g>
 <!-- Room 205: Efficient -->
-<g class="room" id="room-205" onclick="selectRoom('205')">
+<g class="room" id="room-205" data-room-base="05" onclick="selectRoom('205')">
 <rect class="room-efficient" height="150" rx="12" width="130" x="260" y="300"></rect>
 <text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="325" y="385">205</text>
 </g>
 <!-- Bathroom: Automated -->
-<g class="room" id="room-Bath" onclick="selectRoom('Bath')">
+<g class="room" id="room-Bath" data-room-base="Bath" onclick="selectRoom('Bath')">
 <rect class="room-automated" height="150" rx="12" width="130" x="400" y="300"></rect>
 <text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="465" y="385">WASHROOM</text>
 </g>
 <!-- Room 206: Moderate -->
-<g class="room" id="room-206" onclick="selectRoom('206')">
+<g class="room" id="room-206" data-room-base="06" onclick="selectRoom('206')">
 <rect class="room-moderate" height="150" rx="12" width="210" x="540" y="300"></rect>
 <text class="fill-on-surface font-headline-md font-bold" text-anchor="middle" x="645" y="385">206 (DORM)</text>
 </g>
